@@ -2491,7 +2491,6 @@ class OperationTests(OperationTestBase):
             atomic=connection.features.supports_atomic_references_rename,
         )
 
-    @ignore_warnings(category=RemovedInDjango51Warning)
     def test_rename_field(self):
         """
         Tests the RenameField operation.
@@ -3354,7 +3353,6 @@ class OperationTests(OperationTestBase):
             definition[2], {"name": "Pony", "index_together": {("pink", "weight")}}
         )
 
-    # RemovedInDjango51Warning.
     def test_alter_index_together_remove(self):
         operation = migrations.AlterIndexTogether("Pony", None)
         self.assertEqual(

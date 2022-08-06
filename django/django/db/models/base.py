@@ -1152,8 +1152,8 @@ class Model(metaclass=ModelBase):
         op = "gt" if is_next else "lt"
         order = "" if is_next else "-"
         param = getattr(self, field.attname)
-        q = Q((field.name, param), (f"pk__{op}", self.pk), _connector=Q.AND)
-        q = Q(q, (f"{field.name}__{op}", param), _connector=Q.OR)
+        q = Q.create([(field.name, param), (f"pk__{op}", self.pk)], connector=Q.AND)
+        q = Q.create([q, (f"{field.name}__{op}", param)], connector=Q.OR)
         qs = (
             self.__class__._default_manager.using(self._state.db)
             .filter(**kwargs)
@@ -1841,6 +1841,7 @@ class Model(metaclass=ModelBase):
             )
         return errors
 
+    # RemovedInDjango51Warning.
     @classmethod
     def _check_index_together(cls):
         """Check the value of "index_together" option."""
