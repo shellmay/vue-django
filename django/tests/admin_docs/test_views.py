@@ -206,12 +206,12 @@ class AdminDocViewDefaultEngineOnly(TestDataMixin, AdminDocsTestCase):
     TEMPLATES=[
         {
             "NAME": "ONE",
-            "BACKEND": "django.template.backends.django.DjangoTemplates",
+            "BACKEND": "django.templates.backends.django.DjangoTemplates",
             "APP_DIRS": True,
         },
         {
             "NAME": "TWO",
-            "BACKEND": "django.template.backends.django.DjangoTemplates",
+            "BACKEND": "django.templates.backends.django.DjangoTemplates",
             "APP_DIRS": True,
         },
     ]

@@ -233,7 +233,7 @@ class RequestContextTests(SimpleTestCase):
         engine = Engine(
             loaders=[
                 (
-                    "django.template.loaders.locmem.Loader",
+                    "django.templates.loaders.locmem.Loader",
                     {
                         "child": '{{ var|default:"none" }}',
                     },

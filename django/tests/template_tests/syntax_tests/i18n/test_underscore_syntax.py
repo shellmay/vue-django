@@ -55,7 +55,7 @@ class MultipleLocaleActivationTests(MultipleLocaleActivationTestCase):
         with translation.override("nl"):
             self.assertEqual(t.render(Context({})), "Nee")
 
-    # Literal marked up with _(), loading the i18n template tag library
+    # Literal marked up with _(), loading the i18n templates tag library
 
     def test_multiple_locale_loadi18n(self):
         with translation.override("de"):

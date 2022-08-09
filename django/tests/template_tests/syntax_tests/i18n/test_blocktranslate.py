@@ -162,7 +162,7 @@ class I18nBlockTransTagTests(SimpleTestCase):
     def test_i18n17(self):
         """
         Escaping inside blocktranslate and translate works as if it was
-        directly in the template.
+        directly in the templates.
         """
         output = self.engine.render_to_string("i18n17", {"anton": "α & β"})
         self.assertEqual(output, "α &amp; β")
@@ -434,7 +434,7 @@ class I18nBlockTransTagTests(SimpleTestCase):
 
     @setup(
         {
-            "template": (
+            "templates": (
                 "{% load i18n %}{% blocktranslate asvar %}Yes{% endblocktranslate %}"
             )
         }
@@ -444,16 +444,16 @@ class I18nBlockTransTagTests(SimpleTestCase):
             tag_name
         )
         with self.assertRaisesMessage(TemplateSyntaxError, msg):
-            self.engine.render_to_string("template")
+            self.engine.render_to_string("templates")
 
-    @setup({"template": "{% load i18n %}{% blocktranslate %}%s{% endblocktranslate %}"})
+    @setup({"templates": "{% load i18n %}{% blocktranslate %}%s{% endblocktranslate %}"})
     def test_blocktrans_tag_using_a_string_that_looks_like_str_fmt(self):
-        output = self.engine.render_to_string("template")
+        output = self.engine.render_to_string("templates")
         self.assertEqual(output, "%s")
 
     @setup(
         {
-            "template": (
+            "templates": (
                 "{% load i18n %}{% blocktranslate %}{% block b %} {% endblock %}"
                 "{% endblocktranslate %}"
             )
@@ -464,11 +464,11 @@ class I18nBlockTransTagTests(SimpleTestCase):
             tag_name
         )
         with self.assertRaisesMessage(TemplateSyntaxError, msg):
-            self.engine.render_to_string("template")
+            self.engine.render_to_string("templates")
 
     @setup(
         {
-            "template": (
+            "templates": (
                 "{% load i18n %}"
                 "{% blocktranslate %}{% for b in [1, 2, 3] %} {% endfor %}"
                 "{% endblocktranslate %}"
@@ -481,11 +481,11 @@ class I18nBlockTransTagTests(SimpleTestCase):
             f"inside it"
         )
         with self.assertRaisesMessage(TemplateSyntaxError, msg):
-            self.engine.render_to_string("template")
+            self.engine.render_to_string("templates")
 
     @setup(
         {
-            "template": (
+            "templates": (
                 "{% load i18n %}{% blocktranslate with foo=bar with %}{{ foo }}"
                 "{% endblocktranslate %}"
             )
@@ -495,21 +495,21 @@ class I18nBlockTransTagTests(SimpleTestCase):
         with self.assertRaisesMessage(
             TemplateSyntaxError, "The 'with' option was specified more than once"
         ):
-            self.engine.render_to_string("template", {"foo": "bar"})
+            self.engine.render_to_string("templates", {"foo": "bar"})
 
     @setup(
-        {"template": "{% load i18n %}{% blocktranslate with %}{% endblocktranslate %}"}
+        {"templates": "{% load i18n %}{% blocktranslate with %}{% endblocktranslate %}"}
     )
     def test_no_args_with(self, tag_name):
         msg = "\"with\" in '{}' tag needs at least one keyword argument.".format(
             tag_name
         )
         with self.assertRaisesMessage(TemplateSyntaxError, msg):
-            self.engine.render_to_string("template")
+            self.engine.render_to_string("templates")
 
     @setup(
         {
-            "template": (
+            "templates": (
                 "{% load i18n %}{% blocktranslate count a %}{% endblocktranslate %}"
             )
         }
@@ -519,11 +519,11 @@ class I18nBlockTransTagTests(SimpleTestCase):
             tag_name
         )
         with self.assertRaisesMessage(TemplateSyntaxError, msg):
-            self.engine.render_to_string("template", {"a": [1, 2, 3]})
+            self.engine.render_to_string("templates", {"a": [1, 2, 3]})
 
     @setup(
         {
-            "template": (
+            "templates": (
                 "{% load i18n %}{% blocktranslate count counter=num %}{{ counter }}"
                 "{% plural %}{{ counter }}{% endblocktranslate %}"
             )
@@ -532,11 +532,11 @@ class I18nBlockTransTagTests(SimpleTestCase):
     def test_count_not_number(self, tag_name):
         msg = "'counter' argument to '{}' tag must be a number.".format(tag_name)
         with self.assertRaisesMessage(TemplateSyntaxError, msg):
-            self.engine.render_to_string("template", {"num": "1"})
+            self.engine.render_to_string("templates", {"num": "1"})
 
     @setup(
         {
-            "template": (
+            "templates": (
                 "{% load i18n %}{% blocktranslate count count=var|length %}"
                 "There is {{ count }} object. {% block a %} {% endblock %}"
                 "{% endblocktranslate %}"
@@ -546,7 +546,7 @@ class I18nBlockTransTagTests(SimpleTestCase):
     def test_plural_bad_syntax(self, tag_name):
         msg = "'{}' doesn't allow other block tags inside it".format(tag_name)
         with self.assertRaisesMessage(TemplateSyntaxError, msg):
-            self.engine.render_to_string("template", {"var": [1, 2, 3]})
+            self.engine.render_to_string("templates", {"var": [1, 2, 3]})
 
 
 class TranslationBlockTranslateTagTests(SimpleTestCase):
@@ -718,7 +718,7 @@ class TranslationBlockTranslateTagTests(SimpleTestCase):
     @override_settings(LOCALE_PATHS=[os.path.join(here, "other", "locale")])
     def test_bad_placeholder_1(self):
         """
-        Error in translation file should not crash template rendering (#16516).
+        Error in translation file should not crash templates rendering (#16516).
         (%(person)s is translated as %(personne)s in fr.po).
         """
         with translation.override("fr"):
@@ -732,7 +732,7 @@ class TranslationBlockTranslateTagTests(SimpleTestCase):
     @override_settings(LOCALE_PATHS=[os.path.join(here, "other", "locale")])
     def test_bad_placeholder_2(self):
         """
-        Error in translation file should not crash template rendering (#18393).
+        Error in translation file should not crash templates rendering (#18393).
         (%(person) misses a 's' in fr.po, causing the string formatting to fail)
         .
         """

@@ -44,7 +44,7 @@ class DeprecationTests(SimpleTestCase):
         f = EmailForm(data, error_class=DivErrorList)
         msg = (
             "Returning a plain string from DivErrorList is deprecated. Please "
-            "customize via the template system instead."
+            "customize via the templates system instead."
         )
         with self.assertRaisesMessage(RemovedInDjango50Warning, msg):
             f.as_p()

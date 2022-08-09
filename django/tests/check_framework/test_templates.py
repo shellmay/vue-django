@@ -16,10 +16,10 @@ from django.test.utils import override_settings
 class CheckTemplateSettingsAppDirsTest(SimpleTestCase):
     TEMPLATES_APP_DIRS_AND_LOADERS = [
         {
-            "BACKEND": "django.template.backends.django.DjangoTemplates",
+            "BACKEND": "django.templates.backends.django.DjangoTemplates",
             "APP_DIRS": True,
             "OPTIONS": {
-                "loaders": ["django.template.loaders.filesystem.Loader"],
+                "loaders": ["django.templates.loaders.filesystem.Loader"],
             },
         },
     ]
@@ -27,7 +27,7 @@ class CheckTemplateSettingsAppDirsTest(SimpleTestCase):
     @override_settings(TEMPLATES=TEMPLATES_APP_DIRS_AND_LOADERS)
     def test_app_dirs_and_loaders(self):
         """
-        Error if template loaders are specified and APP_DIRS is True.
+        Error if templates loaders are specified and APP_DIRS is True.
         """
         self.assertEqual(check_setting_app_dirs_loaders(None), [E001])
 
@@ -47,13 +47,13 @@ class CheckTemplateSettingsAppDirsTest(SimpleTestCase):
 class CheckTemplateStringIfInvalidTest(SimpleTestCase):
     TEMPLATES_STRING_IF_INVALID = [
         {
-            "BACKEND": "django.template.backends.django.DjangoTemplates",
+            "BACKEND": "django.templates.backends.django.DjangoTemplates",
             "OPTIONS": {
                 "string_if_invalid": False,
             },
         },
         {
-            "BACKEND": "django.template.backends.django.DjangoTemplates",
+            "BACKEND": "django.templates.backends.django.DjangoTemplates",
             "OPTIONS": {
                 "string_if_invalid": 42,
             },
@@ -122,7 +122,7 @@ class CheckTemplateTagLibrariesWithSameName(SimpleTestCase):
     @staticmethod
     def get_settings(module_name, module_path):
         return {
-            "BACKEND": "django.template.backends.django.DjangoTemplates",
+            "BACKEND": "django.templates.backends.django.DjangoTemplates",
             "OPTIONS": {
                 "libraries": {
                     module_name: f"check_framework.template_test_apps.{module_path}",

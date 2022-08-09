@@ -309,7 +309,7 @@ class TemplateViewTest(SimpleTestCase):
 
     def test_get(self):
         """
-        Test a view that simply renders a template on GET
+        Test a view that simply renders a templates on GET
         """
         self._assert_about(AboutTemplateView.as_view()(self.rf.get("/about/")))
 
@@ -322,15 +322,15 @@ class TemplateViewTest(SimpleTestCase):
 
     def test_get_template_attribute(self):
         """
-        Test a view that renders a template on GET with the template name as
+        Test a view that renders a templates on GET with the templates name as
         an attribute on the class.
         """
         self._assert_about(AboutTemplateAttributeView.as_view()(self.rf.get("/about/")))
 
     def test_get_generic_template(self):
         """
-        Test a completely generic view that renders a template on GET
-        with the template name as an argument at instantiation.
+        Test a completely generic view that renders a templates on GET
+        with the templates name as an argument at instantiation.
         """
         self._assert_about(
             TemplateView.as_view(template_name="generic_views/about.html")(
@@ -340,19 +340,19 @@ class TemplateViewTest(SimpleTestCase):
 
     def test_template_name_required(self):
         """
-        A template view must provide a template name.
+        A templates view must provide a templates name.
         """
         msg = (
             "TemplateResponseMixin requires either a definition of "
             "'template_name' or an implementation of 'get_template_names()'"
         )
         with self.assertRaisesMessage(ImproperlyConfigured, msg):
-            self.client.get("/template/no_template/")
+            self.client.get("/templates/no_template/")
 
     @require_jinja2
     def test_template_engine(self):
         """
-        A template view may provide a template engine.
+        A templates view may provide a templates engine.
         """
         request = self.rf.get("/using/")
         view = TemplateView.as_view(template_name="generic_views/using.html")
@@ -368,18 +368,18 @@ class TemplateViewTest(SimpleTestCase):
 
     def test_template_params(self):
         """
-        A generic template view passes kwargs as context.
+        A generic templates view passes kwargs as context.
         """
-        response = self.client.get("/template/simple/bar/")
+        response = self.client.get("/templates/simple/bar/")
         self.assertEqual(response.status_code, 200)
         self.assertEqual(response.context["foo"], "bar")
         self.assertIsInstance(response.context["view"], View)
 
     def test_extra_template_params(self):
         """
-        A template view can be customized to return extra context.
+        A templates view can be customized to return extra context.
         """
-        response = self.client.get("/template/custom/bar/")
+        response = self.client.get("/templates/custom/bar/")
         self.assertEqual(response.status_code, 200)
         self.assertEqual(response.context["foo"], "bar")
         self.assertEqual(response.context["key"], "value")
@@ -387,14 +387,14 @@ class TemplateViewTest(SimpleTestCase):
 
     def test_cached_views(self):
         """
-        A template view can be cached
+        A templates view can be cached
         """
-        response = self.client.get("/template/cached/bar/")
+        response = self.client.get("/templates/cached/bar/")
         self.assertEqual(response.status_code, 200)
 
         time.sleep(1.0)
 
-        response2 = self.client.get("/template/cached/bar/")
+        response2 = self.client.get("/templates/cached/bar/")
         self.assertEqual(response2.status_code, 200)
 
         self.assertEqual(response.content, response2.content)
@@ -402,26 +402,26 @@ class TemplateViewTest(SimpleTestCase):
         time.sleep(2.0)
 
         # Let the cache expire and test again
-        response2 = self.client.get("/template/cached/bar/")
+        response2 = self.client.get("/templates/cached/bar/")
         self.assertEqual(response2.status_code, 200)
 
         self.assertNotEqual(response.content, response2.content)
 
     def test_content_type(self):
-        response = self.client.get("/template/content_type/")
+        response = self.client.get("/templates/content_type/")
         self.assertEqual(response.headers["Content-Type"], "text/plain")
 
     def test_resolve_view(self):
-        match = resolve("/template/content_type/")
+        match = resolve("/templates/content_type/")
         self.assertIs(match.func.view_class, TemplateView)
         self.assertEqual(match.func.view_initkwargs["content_type"], "text/plain")
 
     def test_resolve_login_required_view(self):
-        match = resolve("/template/login_required/")
+        match = resolve("/templates/login_required/")
         self.assertIs(match.func.view_class, TemplateView)
 
     def test_extra_context(self):
-        response = self.client.get("/template/extra_context/")
+        response = self.client.get("/templates/extra_context/")
         self.assertEqual(response.context["title"], "Title")
 
 
@@ -603,8 +603,8 @@ class UseMultipleObjectMixinTest(SimpleTestCase):
 class SingleObjectTemplateResponseMixinTest(SimpleTestCase):
     def test_template_mixin_without_template(self):
         """
-        We want to makes sure that if you use a template mixin, but forget the
-        template, it still tells you it's ImproperlyConfigured instead of
+        We want to makes sure that if you use a templates mixin, but forget the
+        templates, it still tells you it's ImproperlyConfigured instead of
         TemplateDoesNotExist.
         """
         view = views.TemplateResponseWithoutTemplate()

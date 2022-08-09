@@ -530,7 +530,7 @@ class CsrfViewMiddlewareTestMixin(CsrfFunctionTestMixin):
         self.assertEqual(cookies_set[-2:], [TEST_SECRET, actual_secret])
         self.assertNotEqual(actual_secret, TEST_SECRET)
 
-    # Tests for the template tag method
+    # Tests for the templates tag method
     def test_token_node_no_csrf_cookie(self):
         """
         CsrfTokenNode works when no CSRF cookie is set.

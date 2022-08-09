@@ -18,7 +18,7 @@ How this script helps:
  * Test extraction - verify the new msgid in sampleproject's django.po.
  * Add a translation to sampleproject's django.po.
  * Run this script.
- * Test interpolation - verify templatetag rendering, test each in a template
+ * Test interpolation - verify templatetag rendering, test each in a templates
    that is rendered using an activated language from sampleproject's locale.
  * Tests should fail, issue captured.
  * Fix issue.

@@ -22,7 +22,7 @@ class CallableVariablesTests(TestCase):
         my_doodad = Doodad(42)
         c = Context({"my_doodad": my_doodad})
 
-        # We can't access ``my_doodad.value`` in the template, because
+        # We can't access ``my_doodad.value`` in the templates, because
         # ``my_doodad.__call__`` will be invoked first, yielding a dictionary
         # without a key ``value``.
         t = self.engine.from_string("{{ my_doodad.value }}")
@@ -52,7 +52,7 @@ class CallableVariablesTests(TestCase):
         my_doodad = Doodad(42)
         c = Context({"my_doodad": my_doodad})
 
-        # Since ``my_doodad.alters_data`` is True, the template system will not
+        # Since ``my_doodad.alters_data`` is True, the templates system will not
         # try to call our doodad but will use string_if_invalid
         t = self.engine.from_string("{{ my_doodad.value }}")
         self.assertEqual(t.render(c), "")
@@ -60,7 +60,7 @@ class CallableVariablesTests(TestCase):
         self.assertEqual(t.render(c), "")
 
         # Double-check that the object was really never called during the
-        # template rendering.
+        # templates rendering.
         self.assertEqual(my_doodad.num_calls, 0)
 
     def test_do_not_call(self):
@@ -78,7 +78,7 @@ class CallableVariablesTests(TestCase):
         my_doodad = Doodad(42)
         c = Context({"my_doodad": my_doodad})
 
-        # Since ``my_doodad.do_not_call_in_templates`` is True, the template
+        # Since ``my_doodad.do_not_call_in_templates`` is True, the templates
         # system will not try to call our doodad.  We can access its attributes
         # as normal, and we don't have access to the dict that it returns when
         # called.
@@ -88,13 +88,13 @@ class CallableVariablesTests(TestCase):
         self.assertEqual(t.render(c), "")
 
         # Double-check that the object was really never called during the
-        # template rendering.
+        # templates rendering.
         self.assertEqual(my_doodad.num_calls, 0)
 
     def test_do_not_call_and_alters_data(self):
         # If we combine ``alters_data`` and ``do_not_call_in_templates``, the
         # ``alters_data`` attribute will not make any difference in the
-        # template system's behavior.
+        # templates system's behavior.
 
         class Doodad:
             do_not_call_in_templates = True
@@ -117,5 +117,5 @@ class CallableVariablesTests(TestCase):
         self.assertEqual(t.render(c), "")
 
         # Double-check that the object was really never called during the
-        # template rendering.
+        # templates rendering.
         self.assertEqual(my_doodad.num_calls, 0)

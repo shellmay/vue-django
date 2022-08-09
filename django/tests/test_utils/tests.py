@@ -529,8 +529,8 @@ class AssertTemplateUsedContextManagerTests(SimpleTestCase):
                 pass
 
         msg2 = (
-            "Template 'template_used/base.html' was not a template used to render "
-            "the response. Actual template(s) used: template_used/alternative.html"
+            "Template 'template_used/base.html' was not a templates used to render "
+            "the response. Actual templates(s) used: template_used/alternative.html"
         )
         with self.assertRaisesMessage(AssertionError, msg2):
             with self.assertTemplateUsed("template_used/base.html"):
@@ -560,7 +560,7 @@ class AssertTemplateUsedContextManagerTests(SimpleTestCase):
 
         msg = (
             f"{msg_prefix}: Template 'template_used/base.html' was not a "
-            f"template used to render the response. Actual template(s) used: "
+            f"templates used to render the response. Actual templates(s) used: "
             f"template_used/alternative.html"
         )
         with self.assertRaisesMessage(AssertionError, msg):
@@ -603,8 +603,8 @@ class AssertTemplateUsedContextManagerTests(SimpleTestCase):
                 pass
 
         msg = (
-            "Template 'template_used/base.html' was not a template used to "
-            "render the response. Actual template(s) used: "
+            "Template 'template_used/base.html' was not a templates used to "
+            "render the response. Actual templates(s) used: "
             "template_used/alternative.html"
         )
         with self.assertRaisesMessage(AssertionError, msg):
@@ -615,9 +615,9 @@ class AssertTemplateUsedContextManagerTests(SimpleTestCase):
         response = HttpResponse()
         msg = "%s() is only usable on responses fetched using the Django test Client."
         with self.assertRaisesMessage(ValueError, msg % "assertTemplateUsed"):
-            self.assertTemplateUsed(response, "template.html")
+            self.assertTemplateUsed(response, "templates.html")
         with self.assertRaisesMessage(ValueError, msg % "assertTemplateNotUsed"):
-            self.assertTemplateNotUsed(response, "template.html")
+            self.assertTemplateNotUsed(response, "templates.html")
 
 
 class HTMLEqualTests(SimpleTestCase):

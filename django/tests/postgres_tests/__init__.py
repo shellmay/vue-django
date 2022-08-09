@@ -17,7 +17,7 @@ class PostgreSQLTestCase(TestCase):
 
 
 @unittest.skipUnless(connection.vendor == "postgresql", "PostgreSQL specific tests")
-# To locate the widget's template.
+# To locate the widget's templates.
 @modify_settings(INSTALLED_APPS={"append": "django.contrib.postgres"})
 class PostgreSQLWidgetTestCase(WidgetTest, PostgreSQLSimpleTestCase):
     pass

@@ -222,14 +222,14 @@ html_theme_path = ["_theme"]
 # using the given strftime format.
 html_last_updated_fmt = "%b %d, %Y"
 
-# Content template for the index page.
+# Content templates for the index page.
 # html_index = ''
 
-# Custom sidebar templates, maps document names to template names.
+# Custom sidebar templates, maps document names to templates names.
 # html_sidebars = {}
 
 # Additional templates that should be rendered to pages, maps page names to
-# template names.
+# templates names.
 html_additional_pages = {}
 
 # If false, no module index is generated.
@@ -390,7 +390,7 @@ epub_theme = "djangodocs-epub"
 # A unique identification for the text.
 # epub_uid = ''
 
-# A tuple containing the cover image and cover page html template filenames.
+# A tuple containing the cover image and cover page html templates filenames.
 epub_cover = ("", "epub-cover.html")
 
 # A sequence of (type, uri, title) tuples for the guide element of content.opf.

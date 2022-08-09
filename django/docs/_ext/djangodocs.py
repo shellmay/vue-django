@@ -32,12 +32,12 @@ def setup(app):
     app.add_crossref_type(
         directivename="templatetag",
         rolename="ttag",
-        indextemplate="pair: %s; template tag",
+        indextemplate="pair: %s; templates tag",
     )
     app.add_crossref_type(
         directivename="templatefilter",
         rolename="tfilter",
-        indextemplate="pair: %s; template filter",
+        indextemplate="pair: %s; templates filter",
     )
     app.add_crossref_type(
         directivename="fieldlookup",
@@ -381,7 +381,7 @@ class ConsoleDirective(CodeBlock):
 
 
 def html_page_context_hook(app, pagename, templatename, context, doctree):
-    # Put a bool on the context used to render the template. It's used to
+    # Put a bool on the context used to render the templates. It's used to
     # control inclusion of console-tabs.css and activation of the JavaScript.
     # This way it's include only from HTML files rendered from reST files where
     # the ConsoleDirective is used.

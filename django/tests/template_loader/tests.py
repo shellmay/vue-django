@@ -7,18 +7,18 @@ from django.test.client import RequestFactory
 @override_settings(
     TEMPLATES=[
         {
-            "BACKEND": "django.template.backends.dummy.TemplateStrings",
+            "BACKEND": "django.templates.backends.dummy.TemplateStrings",
             "APP_DIRS": True,
         },
         {
-            "BACKEND": "django.template.backends.django.DjangoTemplates",
+            "BACKEND": "django.templates.backends.django.DjangoTemplates",
             "OPTIONS": {
                 "context_processors": [
-                    "django.template.context_processors.request",
+                    "django.templates.context_processors.request",
                 ],
                 "loaders": [
-                    "django.template.loaders.filesystem.Loader",
-                    "django.template.loaders.app_directories.Loader",
+                    "django.templates.loaders.filesystem.Loader",
+                    "django.templates.loaders.app_directories.Loader",
                 ],
             },
         },
@@ -27,7 +27,7 @@ from django.test.client import RequestFactory
 class TemplateLoaderTests(SimpleTestCase):
     def test_get_template_first_engine(self):
         template = get_template("template_loader/hello.html")
-        self.assertEqual(template.render(), "Hello! (template strings)\n")
+        self.assertEqual(template.render(), "Hello! (templates strings)\n")
 
     def test_get_template_second_engine(self):
         template = get_template("template_loader/goodbye.html")
@@ -50,7 +50,7 @@ class TemplateLoaderTests(SimpleTestCase):
         template = select_template(
             ["template_loader/unknown.html", "template_loader/hello.html"]
         )
-        self.assertEqual(template.render(), "Hello! (template strings)\n")
+        self.assertEqual(template.render(), "Hello! (templates strings)\n")
 
     def test_select_template_second_engine(self):
         template = select_template(
@@ -72,9 +72,9 @@ class TemplateLoaderTests(SimpleTestCase):
     def test_select_template_string(self):
         with self.assertRaisesMessage(
             TypeError,
-            "select_template() takes an iterable of template names but got a "
+            "select_template() takes an iterable of templates names but got a "
             "string: 'template_loader/hello.html'. Use get_template() if you "
-            "want to load a single template by name.",
+            "want to load a single templates by name.",
         ):
             select_template("template_loader/hello.html")
 
@@ -102,7 +102,7 @@ class TemplateLoaderTests(SimpleTestCase):
 
     def test_render_to_string_first_engine(self):
         content = render_to_string("template_loader/hello.html")
-        self.assertEqual(content, "Hello! (template strings)\n")
+        self.assertEqual(content, "Hello! (templates strings)\n")
 
     def test_render_to_string_second_engine(self):
         content = render_to_string("template_loader/goodbye.html")
@@ -130,7 +130,7 @@ class TemplateLoaderTests(SimpleTestCase):
         content = render_to_string(
             ["template_loader/unknown.html", "template_loader/hello.html"]
         )
-        self.assertEqual(content, "Hello! (template strings)\n")
+        self.assertEqual(content, "Hello! (templates strings)\n")
 
     def test_render_to_string_with_list_second_engine(self):
         content = render_to_string(

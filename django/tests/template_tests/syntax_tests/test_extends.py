@@ -92,7 +92,7 @@ class InheritanceTests(SimpleTestCase):
     @setup(inheritance_templates)
     def test_inheritance01(self):
         """
-        Standard template with no inheritance
+        Standard templates with no inheritance
         """
         output = self.engine.render_to_string("inheritance01")
         self.assertEqual(output, "1&3_")
@@ -132,7 +132,7 @@ class InheritanceTests(SimpleTestCase):
     @setup(inheritance_templates)
     def test_inheritance06(self):
         """
-        Three-level with variable parent-template name
+        Three-level with variable parent-templates name
         """
         output = self.engine.render_to_string("inheritance06", {"foo": "inheritance02"})
         self.assertEqual(output, "1234")
@@ -199,7 +199,7 @@ class InheritanceTests(SimpleTestCase):
     @setup(inheritance_templates)
     def test_inheritance14(self):
         """
-        A block defined only in a child template shouldn't be displayed
+        A block defined only in a child templates shouldn't be displayed
         """
         output = self.engine.render_to_string("inheritance14")
         self.assertEqual(output, "1&3_")
@@ -239,7 +239,7 @@ class InheritanceTests(SimpleTestCase):
     @setup(inheritance_templates)
     def test_inheritance19(self):
         """
-        {% load %} tag (within a child template)
+        {% load %} tag (within a child templates)
         """
         output = self.engine.render_to_string("inheritance19")
         self.assertEqual(output, "140056783_")
@@ -280,7 +280,7 @@ class InheritanceTests(SimpleTestCase):
     @setup(inheritance_templates)
     def test_inheritance24(self):
         """
-        Inheritance from local context without use of template loader
+        Inheritance from local context without use of templates loader
         """
         context_template = self.engine.from_string(
             "1{% block first %}_{% endblock %}3{% block second %}_{% endblock %}"
@@ -293,7 +293,7 @@ class InheritanceTests(SimpleTestCase):
     @setup(inheritance_templates)
     def test_inheritance25(self):
         """
-        Inheritance from local context with variable parent template
+        Inheritance from local context with variable parent templates
         """
         context_template = [
             self.engine.from_string("Wrong"),
@@ -309,7 +309,7 @@ class InheritanceTests(SimpleTestCase):
     @setup(inheritance_templates)
     def test_inheritance26(self):
         """
-        Set up a base template to extend
+        Set up a base templates to extend
         """
         output = self.engine.render_to_string("inheritance26")
         self.assertEqual(output, "no tags")
@@ -317,7 +317,7 @@ class InheritanceTests(SimpleTestCase):
     @setup(inheritance_templates)
     def test_inheritance27(self):
         """
-        Inheritance from a template that doesn't have any blocks
+        Inheritance from a templates that doesn't have any blocks
         """
         output = self.engine.render_to_string("inheritance27")
         self.assertEqual(output, "no tags")
@@ -325,7 +325,7 @@ class InheritanceTests(SimpleTestCase):
     @setup(inheritance_templates)
     def test_inheritance_28(self):
         """
-        Set up a base template with a space in it.
+        Set up a base templates with a space in it.
         """
         output = self.engine.render_to_string("inheritance 28")
         self.assertEqual(output, "!")
@@ -333,7 +333,7 @@ class InheritanceTests(SimpleTestCase):
     @setup(inheritance_templates)
     def test_inheritance29(self):
         """
-        Inheritance from a template with a space in its name should work.
+        Inheritance from a templates with a space in its name should work.
         """
         output = self.engine.render_to_string("inheritance29")
         self.assertEqual(output, "!")
@@ -341,12 +341,12 @@ class InheritanceTests(SimpleTestCase):
     @setup(inheritance_templates)
     def test_inheritance30(self):
         """
-        Base template, putting block in a conditional {% if %} tag
+        Base templates, putting block in a conditional {% if %} tag
         """
         output = self.engine.render_to_string("inheritance30", {"optional": True})
         self.assertEqual(output, "123")
 
-    # Inherit from a template with block wrapped in an {% if %} tag
+    # Inherit from a templates with block wrapped in an {% if %} tag
     # (in parent), still gets overridden
     @setup(inheritance_templates)
     def test_inheritance31(self):
@@ -361,7 +361,7 @@ class InheritanceTests(SimpleTestCase):
     @setup(inheritance_templates)
     def test_inheritance33(self):
         """
-        Base template, putting block in a conditional {% if %} tag
+        Base templates, putting block in a conditional {% if %} tag
         """
         output = self.engine.render_to_string("inheritance33", {"optional": 1})
         self.assertEqual(output, "123")
@@ -369,7 +369,7 @@ class InheritanceTests(SimpleTestCase):
     @setup(inheritance_templates)
     def test_inheritance34(self):
         """
-        Inherit from a template with block wrapped in an {% if %} tag
+        Inherit from a templates with block wrapped in an {% if %} tag
         (in parent), still gets overridden
         """
         output = self.engine.render_to_string("inheritance34", {"optional": 1})
@@ -378,7 +378,7 @@ class InheritanceTests(SimpleTestCase):
     @setup(inheritance_templates)
     def test_inheritance35(self):
         """
-        Inherit from a template with block wrapped in an {% if %} tag
+        Inherit from a templates with block wrapped in an {% if %} tag
         (in parent), still gets overridden
         """
         output = self.engine.render_to_string("inheritance35", {"optional": 2})
@@ -387,7 +387,7 @@ class InheritanceTests(SimpleTestCase):
     @setup(inheritance_templates)
     def test_inheritance36(self):
         """
-        Base template, putting block in a {% for %} tag
+        Base templates, putting block in a {% for %} tag
         """
         output = self.engine.render_to_string("inheritance36", {"numbers": "123"})
         self.assertEqual(output, "_1_2_3_")
@@ -395,7 +395,7 @@ class InheritanceTests(SimpleTestCase):
     @setup(inheritance_templates)
     def test_inheritance37(self):
         """
-        Inherit from a template with block wrapped in an {% for %} tag
+        Inherit from a templates with block wrapped in an {% for %} tag
         (in parent), still gets overridden
         """
         output = self.engine.render_to_string("inheritance37", {"numbers": "123"})
@@ -404,7 +404,7 @@ class InheritanceTests(SimpleTestCase):
     @setup(inheritance_templates)
     def test_inheritance38(self):
         """
-        Inherit from a template with block wrapped in an {% for %} tag
+        Inherit from a templates with block wrapped in an {% for %} tag
         (in parent), still gets overridden
         """
         output = self.engine.render_to_string("inheritance38")
@@ -443,7 +443,7 @@ class InheritanceTests(SimpleTestCase):
 
     @setup(inheritance_templates)
     def test_extends_duplicate(self):
-        msg = "'extends' cannot appear more than once in the same template"
+        msg = "'extends' cannot appear more than once in the same templates"
         with self.assertRaisesMessage(TemplateSyntaxError, msg):
             self.engine.render_to_string("extends_duplicate")
 

@@ -109,7 +109,7 @@ class SystemChecksTestCase(SimpleTestCase):
             admin.checks.check_dependencies(),
             [
                 checks.Error(
-                    "A 'django.template.backends.django.DjangoTemplates' "
+                    "A 'django.templates.backends.django.DjangoTemplates' "
                     "instance must be configured in TEMPLATES in order to use "
                     "the admin application.",
                     id="admin.E403",
@@ -120,7 +120,7 @@ class SystemChecksTestCase(SimpleTestCase):
     @override_settings(
         TEMPLATES=[
             {
-                "BACKEND": "django.template.backends.django.DjangoTemplates",
+                "BACKEND": "django.templates.backends.django.DjangoTemplates",
                 "DIRS": [],
                 "APP_DIRS": True,
                 "OPTIONS": {
@@ -144,7 +144,7 @@ class SystemChecksTestCase(SimpleTestCase):
                 id="admin.E404",
             ),
             checks.Warning(
-                "'django.template.context_processors.request' must be enabled "
+                "'django.templates.context_processors.request' must be enabled "
                 "in DjangoTemplates (TEMPLATES) in order to use the admin "
                 "navigation sidebar.",
                 id="admin.W411",
@@ -161,12 +161,12 @@ class SystemChecksTestCase(SimpleTestCase):
         AUTHENTICATION_BACKENDS=["admin_checks.tests.ModelBackendSubclass"],
         TEMPLATES=[
             {
-                "BACKEND": "django.template.backends.django.DjangoTemplates",
+                "BACKEND": "django.templates.backends.django.DjangoTemplates",
                 "DIRS": [],
                 "APP_DIRS": True,
                 "OPTIONS": {
                     "context_processors": [
-                        "django.template.context_processors.request",
+                        "django.templates.context_processors.request",
                         "django.contrib.messages.context_processors.messages",
                     ],
                 },
@@ -189,17 +189,17 @@ class SystemChecksTestCase(SimpleTestCase):
     @override_settings(
         TEMPLATES=[
             {
-                "BACKEND": "django.template.backends.dummy.TemplateStrings",
+                "BACKEND": "django.templates.backends.dummy.TemplateStrings",
                 "DIRS": [],
                 "APP_DIRS": True,
             },
             {
-                "BACKEND": "django.template.backends.django.DjangoTemplates",
+                "BACKEND": "django.templates.backends.django.DjangoTemplates",
                 "DIRS": [],
                 "APP_DIRS": True,
                 "OPTIONS": {
                     "context_processors": [
-                        "django.template.context_processors.request",
+                        "django.templates.context_processors.request",
                         "django.contrib.auth.context_processors.auth",
                         "django.contrib.messages.context_processors.messages",
                     ],

@@ -9,7 +9,7 @@ class ExceptionsTests(SimpleTestCase):
     @setup({"exception01": "{% extends 'nonexistent' %}"})
     def test_exception01(self):
         """
-        Raise exception for invalid template name
+        Raise exception for invalid templates name
         """
         with self.assertRaises(TemplateDoesNotExist):
             self.engine.render_to_string("exception01")
@@ -17,7 +17,7 @@ class ExceptionsTests(SimpleTestCase):
     @setup({"exception02": "{% extends nonexistent %}"})
     def test_exception02(self):
         """
-        Raise exception for invalid variable template name
+        Raise exception for invalid variable templates name
         """
         if self.engine.string_if_invalid:
             with self.assertRaises(TemplateDoesNotExist):
@@ -60,7 +60,7 @@ class ExceptionsTests(SimpleTestCase):
     @setup({"exception05": "{% block first %}{{ block.super }}{% endblock %}"})
     def test_exception05(self):
         """
-        Raise exception for block.super used in base template
+        Raise exception for block.super used in base templates
         """
         with self.assertRaises(TemplateSyntaxError):
             self.engine.render_to_string("exception05")

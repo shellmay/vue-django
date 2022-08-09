@@ -158,7 +158,7 @@ class PasswordResetTest(AuthViewsTestCase):
 
     def test_extra_email_context(self):
         """
-        extra_email_context should be available in the email template context.
+        extra_email_context should be available in the email templates context.
         """
         response = self.client.post(
             "/password_reset_extra_email_context/",
@@ -428,7 +428,7 @@ class PasswordResetTest(AuthViewsTestCase):
         response = self.client.get(path)
         # The password_reset_confirm() view passes the user object to the
         # SetPasswordForm``, even on GET requests (#16919). For this test,
-        # {{ form.user }}`` is rendered in the template
+        # {{ form.user }}`` is rendered in the templates
         # registration/password_reset_confirm.html.
         username = User.objects.get(email="staffmember@example.com").username
         self.assertContains(response, "Hello, %s." % username)
@@ -1175,7 +1175,7 @@ class LogoutTest(AuthViewsTestCase):
         self.assertNotIn(SESSION_KEY, self.client.session)
 
     def test_logout_default(self):
-        "Logout without next_page option renders the default template"
+        "Logout without next_page option renders the default templates"
         self.login()
         response = self.client.post("/logout/")
         self.assertContains(response, "Logged out")

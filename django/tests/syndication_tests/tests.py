@@ -633,7 +633,7 @@ class SyndicationFeedTest(FeedTestCase):
         """
         The item title and description can be overridden with templates.
         """
-        response = self.client.get("/syndication/template/")
+        response = self.client.get("/syndication/templates/")
         doc = minidom.parseString(response.content)
         feed = doc.getElementsByTagName("rss")[0]
         chan = feed.getElementsByTagName("channel")[0]

@@ -19,7 +19,7 @@ class SharedTests:
     expected_widget_dir = "templates"
 
     def test_installed_apps_template_found(self):
-        """Can find a custom template in INSTALLED_APPS."""
+        """Can find a custom templates in INSTALLED_APPS."""
         renderer = self.renderer()
         # Found because forms_tests is .
         tpl = renderer.get_template("forms_tests/custom_widget.html")

@@ -34,11 +34,11 @@ class PermanentRedirectLocaleMiddleWare(LocaleMiddleware):
     ROOT_URLCONF="i18n.patterns.urls.default",
     TEMPLATES=[
         {
-            "BACKEND": "django.template.backends.django.DjangoTemplates",
+            "BACKEND": "django.templates.backends.django.DjangoTemplates",
             "DIRS": [os.path.join(os.path.dirname(__file__), "templates")],
             "OPTIONS": {
                 "context_processors": [
-                    "django.template.context_processors.i18n",
+                    "django.templates.context_processors.i18n",
                 ],
             },
         }

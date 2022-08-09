@@ -193,9 +193,9 @@ class TemplateFeed(TestRss2Feed):
     title_template = "syndication/title.html"
     description_template = "syndication/description.html"
 
-    # Defining a template overrides any item_title definition
+    # Defining a templates overrides any item_title definition
     def item_title(self):
-        return "Not in a template"
+        return "Not in a templates"
 
 
 class TemplateContextFeed(TestRss2Feed):

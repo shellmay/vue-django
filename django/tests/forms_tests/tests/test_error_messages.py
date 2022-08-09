@@ -268,7 +268,7 @@ class FormsErrorMessagesTestCase(SimpleTestCase, AssertFormErrorsMixin):
     def test_error_messages_escaping(self):
         # The forms layer doesn't escape input values directly because error
         # messages might be presented in non-HTML contexts. Instead, the
-        # message is marked for escaping by the template engine, so a template
+        # message is marked for escaping by the templates engine, so a templates
         # is needed to trigger the escaping.
         t = Template("{{ form.errors }}")
 

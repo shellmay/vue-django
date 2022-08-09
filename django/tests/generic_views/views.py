@@ -45,7 +45,7 @@ class AuthorCustomDetail(generic.DetailView):
 
 class PageDetail(generic.DetailView):
     queryset = Page.objects.all()
-    template_name_field = "template"
+    template_name_field = "templates"
 
 
 class DictList(generic.ListView):

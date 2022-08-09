@@ -123,8 +123,8 @@ class DeprecationTests(SimpleTestCase):
     )
     def test_length_is_warning(self):
         msg = (
-            "The length_is template filter is deprecated in favor of the length "
-            "template filter and the == operator within an {% if %} tag."
+            "The length_is templates filter is deprecated in favor of the length "
+            "templates filter and the == operator within an {% if %} tag."
         )
         with self.assertRaisesMessage(RemovedInDjango51Warning, msg):
             self.engine.render_to_string("length_is_warning", {"string": "good"})

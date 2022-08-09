@@ -90,14 +90,14 @@ class CsrfViewTests(SimpleTestCase):
     @override_settings(
         TEMPLATES=[
             {
-                "BACKEND": "django.template.backends.django.DjangoTemplates",
+                "BACKEND": "django.templates.backends.django.DjangoTemplates",
                 "OPTIONS": {
                     "loaders": [
                         (
-                            "django.template.loaders.locmem.Loader",
+                            "django.templates.loaders.locmem.Loader",
                             {
                                 CSRF_FAILURE_TEMPLATE_NAME: (
-                                    "Test template for CSRF failure"
+                                    "Test templates for CSRF failure"
                                 )
                             },
                         ),
@@ -109,10 +109,10 @@ class CsrfViewTests(SimpleTestCase):
     def test_custom_template(self):
         """A custom CSRF_FAILURE_TEMPLATE_NAME is used."""
         response = self.client.post("/")
-        self.assertContains(response, "Test template for CSRF failure", status_code=403)
+        self.assertContains(response, "Test templates for CSRF failure", status_code=403)
 
     def test_custom_template_does_not_exist(self):
-        """An exception is raised if a nonexistent template is supplied."""
+        """An exception is raised if a nonexistent templates is supplied."""
         factory = RequestFactory()
         request = factory.post("/")
         with self.assertRaises(TemplateDoesNotExist):

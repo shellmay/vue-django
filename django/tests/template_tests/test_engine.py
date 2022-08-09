@@ -16,19 +16,19 @@ class EngineTest(SimpleTestCase):
         self.assertEqual(
             repr(engine),
             "<Engine: app_dirs=False debug=False loaders=[("
-            "'django.template.loaders.cached.Loader', "
-            "['django.template.loaders.filesystem.Loader'])] "
+            "'django.templates.loaders.cached.Loader', "
+            "['django.templates.loaders.filesystem.Loader'])] "
             "string_if_invalid='' file_charset='utf-8' builtins=["
-            "'django.template.defaulttags', 'django.template.defaultfilters', "
-            "'django.template.loader_tags'] autoescape=True>",
+            "'django.templates.defaulttags', 'django.templates.defaultfilters', "
+            "'django.templates.loader_tags'] autoescape=True>",
         )
 
     def test_repr(self):
         engine = Engine(
             dirs=[TEMPLATE_DIR],
-            context_processors=["django.template.context_processors.debug"],
+            context_processors=["django.templates.context_processors.debug"],
             debug=True,
-            loaders=["django.template.loaders.filesystem.Loader"],
+            loaders=["django.templates.loaders.filesystem.Loader"],
             string_if_invalid="x",
             file_charset="utf-16",
             libraries={"custom": "template_tests.templatetags.custom"},
@@ -37,12 +37,12 @@ class EngineTest(SimpleTestCase):
         self.assertEqual(
             repr(engine),
             f"<Engine: dirs=[{TEMPLATE_DIR!r}] app_dirs=False "
-            "context_processors=['django.template.context_processors.debug'] "
-            "debug=True loaders=['django.template.loaders.filesystem.Loader'] "
+            "context_processors=['django.templates.context_processors.debug'] "
+            "debug=True loaders=['django.templates.loaders.filesystem.Loader'] "
             "string_if_invalid='x' file_charset='utf-16' "
             "libraries={'custom': 'template_tests.templatetags.custom'} "
-            "builtins=['django.template.defaulttags', "
-            "'django.template.defaultfilters', 'django.template.loader_tags'] "
+            "builtins=['django.templates.defaulttags', "
+            "'django.templates.defaultfilters', 'django.templates.loader_tags'] "
             "autoescape=False>",
         )
 
@@ -76,7 +76,7 @@ class GetDefaultTests(SimpleTestCase):
         TEMPLATES=[
             {
                 "NAME": "default",
-                "BACKEND": "django.template.backends.django.DjangoTemplates",
+                "BACKEND": "django.templates.backends.django.DjangoTemplates",
                 "OPTIONS": {"file_charset": "abc"},
             }
         ]
@@ -88,12 +88,12 @@ class GetDefaultTests(SimpleTestCase):
         TEMPLATES=[
             {
                 "NAME": "default",
-                "BACKEND": "django.template.backends.django.DjangoTemplates",
+                "BACKEND": "django.templates.backends.django.DjangoTemplates",
                 "OPTIONS": {"file_charset": "abc"},
             },
             {
                 "NAME": "other",
-                "BACKEND": "django.template.backends.django.DjangoTemplates",
+                "BACKEND": "django.templates.backends.django.DjangoTemplates",
                 "OPTIONS": {"file_charset": "def"},
             },
         ]
@@ -110,11 +110,11 @@ class LoaderTests(SimpleTestCase):
 
     def test_loader_priority(self):
         """
-        #21460 -- The order of template loader works.
+        #21460 -- The order of templates loader works.
         """
         loaders = [
-            "django.template.loaders.filesystem.Loader",
-            "django.template.loaders.app_directories.Loader",
+            "django.templates.loaders.filesystem.Loader",
+            "django.templates.loaders.app_directories.Loader",
         ]
         engine = Engine(dirs=[OTHER_DIR, TEMPLATE_DIR], loaders=loaders)
         template = engine.get_template("priority/foo.html")
@@ -122,14 +122,14 @@ class LoaderTests(SimpleTestCase):
 
     def test_cached_loader_priority(self):
         """
-        The order of template loader works. Refs #21460.
+        The order of templates loader works. Refs #21460.
         """
         loaders = [
             (
-                "django.template.loaders.cached.Loader",
+                "django.templates.loaders.cached.Loader",
                 [
-                    "django.template.loaders.filesystem.Loader",
-                    "django.template.loaders.app_directories.Loader",
+                    "django.templates.loaders.filesystem.Loader",
+                    "django.templates.loaders.app_directories.Loader",
                 ],
             ),
         ]

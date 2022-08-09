@@ -16,7 +16,7 @@ E002 = Error(
     id="templates.E002",
 )
 E003 = Error(
-    "{} is used for multiple template tag modules: {}",
+    "{} is used for multiple templates tag modules: {}",
     id="templates.E003",
 )
 

@@ -405,7 +405,7 @@ action)</option>
 
     def test_popup_template_response_on_add(self):
         """
-        Success on popups shall be rendered from template in order to allow
+        Success on popups shall be rendered from templates in order to allow
         easy customization.
         """
         response = self.client.post(

@@ -495,7 +495,7 @@ class InclusionTagTests(TagTestCase):
     def test_15070_use_l10n(self):
         """
         Inclusion tag passes down `use_l10n` of context to the
-        Context of the included/rendered template as well.
+        Context of the included/rendered templates as well.
         """
         c = Context({})
         t = self.engine.from_string("{% load inclusion %}{% inclusion_tag_use_l10n %}")
@@ -535,7 +535,7 @@ class TemplateTagLoadingTests(SimpleTestCase):
 
     def test_load_error(self):
         msg = (
-            "Invalid template library specified. ImportError raised when "
+            "Invalid templates library specified. ImportError raised when "
             "trying to load 'template_tests.broken_tag': cannot import name "
             "'Xtemplate'"
         )
@@ -545,7 +545,7 @@ class TemplateTagLoadingTests(SimpleTestCase):
     def test_load_error_egg(self):
         egg_name = "%s/tagsegg.egg" % self.egg_dir
         msg = (
-            "Invalid template library specified. ImportError raised when "
+            "Invalid templates library specified. ImportError raised when "
             "trying to load 'tagsegg.templatetags.broken_egg': cannot "
             "import name 'Xtemplate'"
         )

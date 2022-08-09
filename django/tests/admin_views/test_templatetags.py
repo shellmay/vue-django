@@ -18,7 +18,7 @@ class AdminTemplateTagsTest(AdminViewBasicTestCase):
 
     def test_submit_row(self):
         """
-        submit_row template tag should pass whole context.
+        submit_row templates tag should pass whole context.
         """
         request = self.request_factory.get(
             reverse("admin:auth_user_change", args=[self.superuser.pk])
@@ -56,8 +56,8 @@ class AdminTemplateTagsTest(AdminViewBasicTestCase):
 
     def test_override_change_form_template_tags(self):
         """
-        admin_modify template tags follow the standard search pattern
-        admin/app_label/model/template.html.
+        admin_modify templates tags follow the standard search pattern
+        admin/app_label/model/templates.html.
         """
         article = Article.objects.all()[0]
         request = self.request_factory.get(
@@ -79,8 +79,8 @@ class AdminTemplateTagsTest(AdminViewBasicTestCase):
 
     def test_override_change_list_template_tags(self):
         """
-        admin_list template tags follow the standard search pattern
-        admin/app_label/model/template.html.
+        admin_list templates tags follow the standard search pattern
+        admin/app_label/model/templates.html.
         """
         request = self.request_factory.get(
             reverse("admin:admin_views_article_changelist")

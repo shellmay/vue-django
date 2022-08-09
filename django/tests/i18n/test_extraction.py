@@ -118,7 +118,7 @@ class ExtractorTests(POFileAssertionMixin, RunInTmpDirMixin, SimpleTestCase):
         None can be passed for the line_number argument to skip checking of
         the :42 suffix part.
         A string token can also be passed as line_number, in which case it
-        will be searched in the template, and its line number will be used.
+        will be searched in the templates, and its line number will be used.
         A msgid is a suitable candidate.
         """
         return self._assertPoLocComment(True, po_filename, line_number, *comment_parts)
@@ -373,7 +373,7 @@ class BasicExtractorTests(ExtractorTests):
     def test_template_message_context_extractor(self):
         """
         Message contexts are correctly extracted for the {% translate %} and
-        {% blocktranslate %} template tags (#14806).
+        {% blocktranslate %} templates tags (#14806).
         """
         management.call_command("makemessages", locale=[LOCALE], verbosity=0)
         self.assertTrue(os.path.exists(self.PO_FILE))
@@ -390,7 +390,7 @@ class BasicExtractorTests(ExtractorTests):
             # {% translate %} with a filter
             for (
                 minor_part
-            ) in "abcdefgh":  # Iterate from #7.1a to #7.1h template markers
+            ) in "abcdefgh":  # Iterate from #7.1a to #7.1h templates markers
                 self.assertIn(
                     'msgctxt "context #7.1{}"'.format(minor_part), po_contents
                 )

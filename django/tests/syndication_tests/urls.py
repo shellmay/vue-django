@@ -34,7 +34,7 @@ urlpatterns = [
     path("syndication/aware-dates/", feeds.TZAwareDatesFeed()),
     path("syndication/feedurl/", feeds.TestFeedUrlFeed()),
     path("syndication/articles/", feeds.ArticlesFeed()),
-    path("syndication/template/", feeds.TemplateFeed()),
+    path("syndication/templates/", feeds.TemplateFeed()),
     path("syndication/template_context/", feeds.TemplateContextFeed()),
     path("syndication/rss2/single-enclosure/", feeds.TestSingleEnclosureRSSFeed()),
     path("syndication/rss2/multiple-enclosure/", feeds.TestMultipleEnclosureRSSFeed()),

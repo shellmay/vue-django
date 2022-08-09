@@ -1555,9 +1555,9 @@ class ResolverMatchTests(SimpleTestCase):
     @override_settings(ROOT_URLCONF="urlpatterns_reverse.urls")
     def test_repr_functools_partial(self):
         tests = [
-            ("partial", "template.html"),
+            ("partial", "templates.html"),
             ("partial_nested", "nested_partial.html"),
-            ("partial_wrapped", "template.html"),
+            ("partial_wrapped", "templates.html"),
         ]
         for name, template_name in tests:
             with self.subTest(name=name):

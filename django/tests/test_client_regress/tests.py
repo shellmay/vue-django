@@ -161,14 +161,14 @@ class AssertContainsTests(SimpleTestCase):
             )
 
     def test_unicode_contains(self):
-        "Unicode characters can be found in template context"
+        "Unicode characters can be found in templates context"
         # Regression test for #10183
         r = self.client.get("/check_unicode/")
         self.assertContains(r, "さかき")
         self.assertContains(r, b"\xe5\xb3\xa0".decode())
 
     def test_unicode_not_contains(self):
-        "Unicode characters can be searched for, and not found in template context"
+        "Unicode characters can be searched for, and not found in templates context"
         # Regression test for #10183
         r = self.client.get("/check_unicode/")
         self.assertNotContains(r, "はたけ")
@@ -233,7 +233,7 @@ class AssertTemplateUsedTests(TestDataMixin, TestCase):
         "Template usage assertions work then templates aren't in use"
         response = self.client.get("/no_template_view/")
 
-        # The no template case doesn't mess with the template assertions
+        # The no templates case doesn't mess with the templates assertions
         self.assertTemplateNotUsed(response, "GET Template")
 
         try:
@@ -262,8 +262,8 @@ class AssertTemplateUsedTests(TestDataMixin, TestCase):
         with self.assertRaisesMessage(AssertionError, "abc" + msg):
             self.assertTemplateNotUsed(response, "Empty GET Template", msg_prefix="abc")
         msg = (
-            ": Template 'Empty POST Template' was not a template used to "
-            "render the response. Actual template(s) used: Empty GET Template"
+            ": Template 'Empty POST Template' was not a templates used to "
+            "render the response. Actual templates(s) used: Empty GET Template"
         )
         with self.assertRaisesMessage(AssertionError, msg):
             self.assertTemplateUsed(response, "Empty POST Template")
@@ -297,8 +297,8 @@ class AssertTemplateUsedTests(TestDataMixin, TestCase):
         with self.assertRaisesMessage(AssertionError, msg % "base.html"):
             self.assertTemplateNotUsed(response, "base.html")
         msg = (
-            "Template 'Valid POST Template' was not a template used to render "
-            "the response. Actual template(s) used: form_view.html, base.html"
+            "Template 'Valid POST Template' was not a templates used to render "
+            "the response. Actual templates(s) used: form_view.html, base.html"
         )
         with self.assertRaisesMessage(AssertionError, msg):
             self.assertTemplateUsed(response, "Valid POST Template")
@@ -310,7 +310,7 @@ class AssertTemplateUsedTests(TestDataMixin, TestCase):
             self.assertTemplateUsed(response, "base.html", count=2)
 
     def test_template_rendered_multiple_times(self):
-        """Template assertions work when a template is rendered multiple times."""
+        """Template assertions work when a templates is rendered multiple times."""
         response = self.client.get("/render_template_multiple_times/")
 
         self.assertTemplateUsed(response, "base.html", count=2)
@@ -701,7 +701,7 @@ class TemplateExceptionTests(SimpleTestCase):
     @override_settings(
         TEMPLATES=[
             {
-                "BACKEND": "django.template.backends.django.DjangoTemplates",
+                "BACKEND": "django.templates.backends.django.DjangoTemplates",
                 "DIRS": [os.path.join(os.path.dirname(__file__), "bad_templates")],
             }
         ]
@@ -791,7 +791,7 @@ class ContextTests(TestDataMixin, TestCase):
         with self.settings(
             TEMPLATES=[
                 {
-                    "BACKEND": "django.template.backends.django.DjangoTemplates",
+                    "BACKEND": "django.templates.backends.django.DjangoTemplates",
                     "APP_DIRS": True,
                     "OPTIONS": {
                         "context_processors": [

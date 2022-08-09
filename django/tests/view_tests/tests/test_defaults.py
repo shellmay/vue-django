@@ -68,11 +68,11 @@ class DefaultsTests(TestCase):
     @override_settings(
         TEMPLATES=[
             {
-                "BACKEND": "django.template.backends.django.DjangoTemplates",
+                "BACKEND": "django.templates.backends.django.DjangoTemplates",
                 "OPTIONS": {
                     "loaders": [
                         (
-                            "django.template.loaders.locmem.Loader",
+                            "django.templates.loaders.locmem.Loader",
                             {
                                 "404.html": "{{ csrf_token }}",
                             },
@@ -105,18 +105,18 @@ class DefaultsTests(TestCase):
     @override_settings(
         TEMPLATES=[
             {
-                "BACKEND": "django.template.backends.django.DjangoTemplates",
+                "BACKEND": "django.templates.backends.django.DjangoTemplates",
                 "OPTIONS": {
                     "loaders": [
                         (
-                            "django.template.loaders.locmem.Loader",
+                            "django.templates.loaders.locmem.Loader",
                             {
                                 "404.html": (
-                                    "This is a test template for a 404 error "
+                                    "This is a test templates for a 404 error "
                                     "(path: {{ request_path }}, "
                                     "exception: {{ exception }})."
                                 ),
-                                "500.html": "This is a test template for a 500 error.",
+                                "500.html": "This is a test templates for a 500 error.",
                             },
                         ),
                     ],
@@ -129,7 +129,7 @@ class DefaultsTests(TestCase):
         404.html and 500.html templates are picked by their respective handler.
         """
         response = self.client.get("/server_error/")
-        self.assertContains(response, "test template for a 500 error", status_code=500)
+        self.assertContains(response, "test templates for a 500 error", status_code=500)
         response = self.client.get("/no_such_url/")
         self.assertContains(response, "path: /no_such_url/", status_code=404)
         self.assertContains(response, "exception: Resolver404", status_code=404)
@@ -153,7 +153,7 @@ class DefaultsTests(TestCase):
     def test_custom_templates_wrong(self):
         """
         Default error views should raise TemplateDoesNotExist when passed a
-        template that doesn't exist.
+        templates that doesn't exist.
         """
         request = self.request_factory.get("/")
 

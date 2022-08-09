@@ -65,7 +65,7 @@ class AdminSidebarTests(TestCase):
     @override_settings(
         TEMPLATES=[
             {
-                "BACKEND": "django.template.backends.django.DjangoTemplates",
+                "BACKEND": "django.templates.backends.django.DjangoTemplates",
                 "DIRS": [],
                 "APP_DIRS": True,
                 "OPTIONS": {
@@ -89,7 +89,7 @@ class AdminSidebarTests(TestCase):
     def test_included_app_list_template_context_fully_set(self):
         # All context variables should be set when rendering the sidebar.
         url = reverse("test_with_sidebar:auth_user_changelist")
-        with self.assertNoLogs("django.template", "DEBUG"):
+        with self.assertNoLogs("django.templates", "DEBUG"):
             self.client.get(url)
 
     def test_sidebar_model_name_non_ascii(self):

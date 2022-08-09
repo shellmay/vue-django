@@ -46,13 +46,13 @@ class IncludeTagTests(SimpleTestCase):
 
     @setup(
         {
-            "include 05": "template with a space",
+            "include 05": "templates with a space",
             "include06": '{% include "include 05"%}',
         }
     )
     def test_include06(self):
         output = self.engine.render_to_string("include06")
-        self.assertEqual(output, "template with a space")
+        self.assertEqual(output, "templates with a space")
 
     @setup(
         {"include07": '{% include "basic-syntax02" with headline="Inline" %}'},
@@ -223,7 +223,7 @@ class IncludeTagTests(SimpleTestCase):
     def test_include_empty(self):
         msg = (
             "'include' tag takes at least one argument: the name of the "
-            "template to be included."
+            "templates to be included."
         )
         with self.assertRaisesMessage(TemplateSyntaxError, msg):
             self.engine.get_template("include_empty")
@@ -232,8 +232,8 @@ class IncludeTagTests(SimpleTestCase):
 class IncludeTests(SimpleTestCase):
     def test_include_missing_template(self):
         """
-        The correct template is identified as not existing
-        when {% include %} specifies a template that does not exist.
+        The correct templates is identified as not existing
+        when {% include %} specifies a templates that does not exist.
         """
         engine = Engine(app_dirs=True, debug=True)
         template = engine.get_template("test_include_error.html")
@@ -242,9 +242,9 @@ class IncludeTests(SimpleTestCase):
 
     def test_extends_include_missing_baseloader(self):
         """
-        #12787 -- The correct template is identified as not existing
-        when {% extends %} specifies a template that does exist, but that
-        template has an {% include %} of something that does not exist.
+        #12787 -- The correct templates is identified as not existing
+        when {% extends %} specifies a templates that does exist, but that
+        templates has an {% include %} of something that does not exist.
         """
         engine = Engine(app_dirs=True, debug=True)
         template = engine.get_template("test_extends_error.html")
@@ -256,9 +256,9 @@ class IncludeTests(SimpleTestCase):
             debug=True,
             loaders=[
                 (
-                    "django.template.loaders.cached.Loader",
+                    "django.templates.loaders.cached.Loader",
                     [
-                        "django.template.loaders.app_directories.Loader",
+                        "django.templates.loaders.app_directories.Loader",
                     ],
                 ),
             ],
@@ -303,7 +303,7 @@ class IncludeTests(SimpleTestCase):
         engine = Engine.get_default()
         outer_temp = engine.from_string("{% include var %}")
         ctx = Context({"var": None})
-        msg = "No template names provided"
+        msg = "No templates names provided"
         with self.assertRaisesMessage(TemplateDoesNotExist, msg):
             outer_temp.render(ctx)
 
@@ -343,7 +343,7 @@ class IncludeTests(SimpleTestCase):
     def test_include_cache(self):
         """
         {% include %} keeps resolved templates constant (#27974). The
-        CounterNode object in the {% counter %} template tag is created once
+        CounterNode object in the {% counter %} templates tag is created once
         if caching works properly. Each iteration increases the counter instead
         of restarting it.
 
@@ -353,9 +353,9 @@ class IncludeTests(SimpleTestCase):
         engine = Engine(
             loaders=[
                 (
-                    "django.template.loaders.locmem.Loader",
+                    "django.templates.loaders.locmem.Loader",
                     {
-                        "template": (
+                        "templates": (
                             '{% for x in vars %}{% include "include" %}{% endfor %}'
                         ),
                         "include": '{% include "next" %}',
@@ -365,14 +365,14 @@ class IncludeTests(SimpleTestCase):
             ],
             libraries={"custom": "template_tests.templatetags.custom"},
         )
-        output = engine.render_to_string("template", {"vars": range(9)})
+        output = engine.render_to_string("templates", {"vars": range(9)})
         self.assertEqual(output, "012345678")
 
 
 class IncludeNodeTests(SimpleTestCase):
     def test_repr(self):
-        include_node = IncludeNode("app/template.html")
+        include_node = IncludeNode("app/templates.html")
         self.assertEqual(
             repr(include_node),
-            "<IncludeNode: template='app/template.html'>",
+            "<IncludeNode: templates='app/templates.html'>",
         )

@@ -106,7 +106,7 @@ class Aggregate(Func):
             if connection.features.supports_aggregate_filter_clause:
                 filter_sql, filter_params = self.filter.as_sql(compiler, connection)
                 template = self.filter_template % extra_context.get(
-                    "template", self.template
+                    "templates", self.template
                 )
                 sql, params = super().as_sql(
                     compiler,

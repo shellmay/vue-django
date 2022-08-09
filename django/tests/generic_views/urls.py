@@ -9,28 +9,28 @@ from .models import Book
 
 urlpatterns = [
     # TemplateView
-    path("template/no_template/", TemplateView.as_view()),
-    path("template/login_required/", login_required(TemplateView.as_view())),
+    path("templates/no_template/", TemplateView.as_view()),
+    path("templates/login_required/", login_required(TemplateView.as_view())),
     path(
-        "template/simple/<foo>/",
+        "templates/simple/<foo>/",
         TemplateView.as_view(template_name="generic_views/about.html"),
     ),
     path(
-        "template/custom/<foo>/",
+        "templates/custom/<foo>/",
         views.CustomTemplateView.as_view(template_name="generic_views/about.html"),
     ),
     path(
-        "template/content_type/",
+        "templates/content_type/",
         TemplateView.as_view(
             template_name="generic_views/robots.txt", content_type="text/plain"
         ),
     ),
     path(
-        "template/cached/<foo>/",
+        "templates/cached/<foo>/",
         cache_page(2.0)(TemplateView.as_view(template_name="generic_views/about.html")),
     ),
     path(
-        "template/extra_context/",
+        "templates/extra_context/",
         TemplateView.as_view(
             template_name="generic_views/about.html", extra_context={"title": "Title"}
         ),

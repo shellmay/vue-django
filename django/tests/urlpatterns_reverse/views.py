@@ -58,11 +58,11 @@ def bad_view(request, *args, **kwargs):
     raise ValueError("I don't think I'm getting good value for this view")
 
 
-empty_view_partial = partial(empty_view, template_name="template.html")
+empty_view_partial = partial(empty_view, template_name="templates.html")
 empty_view_nested_partial = partial(
     empty_view_partial, template_name="nested_partial.html"
 )
 empty_view_wrapped = update_wrapper(
-    partial(empty_view, template_name="template.html"),
+    partial(empty_view, template_name="templates.html"),
     empty_view,
 )

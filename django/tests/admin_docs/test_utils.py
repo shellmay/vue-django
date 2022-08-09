@@ -29,7 +29,7 @@ class TestUtils(AdminDocsSimpleTestCase):
 
     **Template:**
 
-    :template:`myapp/my_template.html` (DESCRIPTION)
+    :templates:`myapp/my_template.html` (DESCRIPTION)
 
     some_metadata: some data
     """
@@ -47,7 +47,7 @@ class TestUtils(AdminDocsSimpleTestCase):
             "Display an individual :model:`myapp.MyModel`.\n\n"
             "**Context**\n\n``RequestContext``\n\n``mymodel``\n"
             "    An instance of :model:`myapp.MyModel`.\n\n"
-            "**Template:**\n\n:template:`myapp/my_template.html` "
+            "**Template:**\n\n:templates:`myapp/my_template.html` "
             "(DESCRIPTION)"
         )
         self.assertEqual(title, docstring_title)
@@ -95,7 +95,7 @@ class TestUtils(AdminDocsSimpleTestCase):
         markup = '<p><a class="reference external" href="/admindocs/%s">title</a></p>\n'
         self.assertEqual(parse_rst("`title`", "model"), markup % "models/title/")
         self.assertEqual(parse_rst("`title`", "view"), markup % "views/title/")
-        self.assertEqual(parse_rst("`title`", "template"), markup % "templates/title/")
+        self.assertEqual(parse_rst("`title`", "templates"), markup % "templates/title/")
         self.assertEqual(parse_rst("`title`", "filter"), markup % "filters/#title")
         self.assertEqual(parse_rst("`title`", "tag"), markup % "tags/#title")
 

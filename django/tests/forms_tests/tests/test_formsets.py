@@ -1507,22 +1507,22 @@ class FormsFormsetTestCase(SimpleTestCase):
 
     def test_template_name_uses_renderer_value(self):
         class CustomRenderer(TemplatesSetting):
-            formset_template_name = "a/custom/formset/template.html"
+            formset_template_name = "a/custom/formset/templates.html"
 
         ChoiceFormSet = formset_factory(Choice, renderer=CustomRenderer)
 
         self.assertEqual(
-            ChoiceFormSet().template_name, "a/custom/formset/template.html"
+            ChoiceFormSet().template_name, "a/custom/formset/templates.html"
         )
 
     def test_template_name_can_be_overridden(self):
         class CustomFormSet(BaseFormSet):
-            template_name = "a/custom/formset/template.html"
+            template_name = "a/custom/formset/templates.html"
 
         ChoiceFormSet = formset_factory(Choice, formset=CustomFormSet)
 
         self.assertEqual(
-            ChoiceFormSet().template_name, "a/custom/formset/template.html"
+            ChoiceFormSet().template_name, "a/custom/formset/templates.html"
         )
 
     def test_custom_renderer(self):
@@ -1913,7 +1913,7 @@ class DeprecationTests(SimpleTestCase):
 
     def test_no_management_form_warning(self):
         """
-        Management forms are already rendered with the new div template.
+        Management forms are already rendered with the new div templates.
         """
         with isolate_lru_cache(get_default_renderer), self.settings(
             FORM_RENDERER="django.forms.renderers.DjangoTemplates"

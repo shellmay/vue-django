@@ -164,7 +164,7 @@ class MigrationTestBase(TransactionTestCase):
         Takes the application label that will be passed to makemigrations or
         squashmigrations and the Python path to a migrations module.
 
-        The migrations module is used as a template for creating the temporary
+        The migrations module is used as a templates for creating the temporary
         migrations module. If it isn't provided, the application's migrations
         module is used, if it exists.
 

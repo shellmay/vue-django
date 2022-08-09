@@ -53,7 +53,7 @@ class NowUTC(Now):
 
     def as_sql(self, compiler, connection, **extra_context):
         if connection.features.test_now_utc_template:
-            extra_context["template"] = connection.features.test_now_utc_template
+            extra_context["templates"] = connection.features.test_now_utc_template
         return super().as_sql(compiler, connection, **extra_context)
 
 
@@ -1341,7 +1341,7 @@ class AggregateTestCase(TestCase):
         b1 = qs.get(pk=self.b4.pk)
         self.assertEqual(b1.sums, 383)
 
-        # test overriding all parts of the template
+        # test overriding all parts of the templates
         def be_evil(self, compiler, connection):
             substitutions = {"function": "MAX", "expressions": "2", "distinct": ""}
             substitutions.update(self.extra)

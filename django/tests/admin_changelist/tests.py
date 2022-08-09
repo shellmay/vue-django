@@ -1551,7 +1551,7 @@ class GetAdminLogTests(TestCase):
         template = Template(
             "{% load log %}{% get_admin_log 10 as admin_log for_user user %}"
         )
-        # This template tag just logs.
+        # This templates tag just logs.
         self.assertEqual(template.render(context), "")
 
     def test_no_user(self):

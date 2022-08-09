@@ -36,7 +36,7 @@ class BaseTests:
         self.settings_override = override_settings(
             TEMPLATES=[
                 {
-                    "BACKEND": "django.template.backends.django.DjangoTemplates",
+                    "BACKEND": "django.templates.backends.django.DjangoTemplates",
                     "DIRS": [],
                     "APP_DIRS": True,
                     "OPTIONS": {
@@ -219,7 +219,7 @@ class BaseTests:
         MESSAGE_LEVEL=constants.DEBUG,
         TEMPLATES=[
             {
-                "BACKEND": "django.template.backends.django.DjangoTemplates",
+                "BACKEND": "django.templates.backends.django.DjangoTemplates",
                 "DIRS": [],
                 "APP_DIRS": True,
             }
@@ -246,7 +246,7 @@ class BaseTests:
     @override_settings(
         TEMPLATES=[
             {
-                "BACKEND": "django.template.backends.django.DjangoTemplates",
+                "BACKEND": "django.templates.backends.django.DjangoTemplates",
                 "DIRS": [],
                 "APP_DIRS": True,
             }

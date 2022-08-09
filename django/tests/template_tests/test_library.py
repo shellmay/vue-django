@@ -55,21 +55,21 @@ class InclusionTagRegistrationTests(SimpleTestCase):
         self.library = Library()
 
     def test_inclusion_tag(self):
-        @self.library.inclusion_tag("template.html")
+        @self.library.inclusion_tag("templates.html")
         def func():
             return ""
 
         self.assertIn("func", self.library.tags)
 
     def test_inclusion_tag_name(self):
-        @self.library.inclusion_tag("template.html", name="name")
+        @self.library.inclusion_tag("templates.html", name="name")
         def func():
             return ""
 
         self.assertIn("name", self.library.tags)
 
     def test_inclusion_tag_wrapped(self):
-        @self.library.inclusion_tag("template.html")
+        @self.library.inclusion_tag("templates.html")
         @functools.lru_cache(maxsize=32)
         def func():
             return ""

@@ -1435,10 +1435,10 @@ class AdminViewBasicTest(AdminViewBasicTestCase):
         ]
         for url in tests:
             with self.subTest(url=url):
-                with self.assertNoLogs("django.template", "DEBUG"):
+                with self.assertNoLogs("django.templates", "DEBUG"):
                     self.client.get(url)
         # Login must be after logout.
-        with self.assertNoLogs("django.template", "DEBUG"):
+        with self.assertNoLogs("django.templates", "DEBUG"):
             self.client.post(reverse("admin:logout"))
             self.client.get(reverse("admin:login"))
 
@@ -1449,7 +1449,7 @@ class AdminViewBasicTest(AdminViewBasicTestCase):
             "index": "0",
             "_selected_action": self.a1.pk,
         }
-        with self.assertNoLogs("django.template", "DEBUG"):
+        with self.assertNoLogs("django.templates", "DEBUG"):
             self.client.post(reverse("admin:admin_views_article_changelist"), post_data)
 
     @override_settings(
@@ -1491,7 +1491,7 @@ class AdminViewBasicTest(AdminViewBasicTestCase):
     ],
     TEMPLATES=[
         {
-            "BACKEND": "django.template.backends.django.DjangoTemplates",
+            "BACKEND": "django.templates.backends.django.DjangoTemplates",
             # Put this app's and the shared tests templates dirs in DIRS to
             # take precedence over the admin's templates dir.
             "DIRS": [
@@ -1501,8 +1501,8 @@ class AdminViewBasicTest(AdminViewBasicTestCase):
             "APP_DIRS": True,
             "OPTIONS": {
                 "context_processors": [
-                    "django.template.context_processors.debug",
-                    "django.template.context_processors.request",
+                    "django.templates.context_processors.debug",
+                    "django.templates.context_processors.request",
                     "django.contrib.auth.context_processors.auth",
                     "django.contrib.messages.context_processors.messages",
                 ],
@@ -1512,14 +1512,14 @@ class AdminViewBasicTest(AdminViewBasicTestCase):
 )
 class AdminCustomTemplateTests(AdminViewBasicTestCase):
     def test_custom_model_admin_templates(self):
-        # Test custom change list template with custom extra context
+        # Test custom change list templates with custom extra context
         response = self.client.get(
             reverse("admin:admin_views_customarticle_changelist")
         )
         self.assertContains(response, "var hello = 'Hello!';")
         self.assertTemplateUsed(response, "custom_admin/change_list.html")
 
-        # Test custom add form template
+        # Test custom add form templates
         response = self.client.get(reverse("admin:admin_views_customarticle_add"))
         self.assertTemplateUsed(response, "custom_admin/add_form.html")
 
@@ -1539,7 +1539,7 @@ class AdminCustomTemplateTests(AdminViewBasicTestCase):
         article_pk = CustomArticle.objects.all()[0].pk
 
         # Test custom delete, change, and object history templates
-        # Test custom change form template
+        # Test custom change form templates
         response = self.client.get(
             reverse("admin:admin_views_customarticle_change", args=(article_pk,))
         )
@@ -1564,7 +1564,7 @@ class AdminCustomTemplateTests(AdminViewBasicTestCase):
         )
         self.assertTemplateUsed(response, "custom_admin/object_history.html")
 
-        # A custom popup response template may be specified by
+        # A custom popup response templates may be specified by
         # ModelAdmin.popup_response_template.
         response = self.client.post(
             reverse("admin:admin_views_customarticle_add") + "?%s=1" % IS_POPUP_VAR,
@@ -1579,7 +1579,7 @@ class AdminCustomTemplateTests(AdminViewBasicTestCase):
 
     def test_extended_bodyclass_template_change_form(self):
         """
-        The admin/change_form.html template uses block.super in the
+        The admin/change_form.html templates uses block.super in the
         bodyclass block.
         """
         response = self.client.get(reverse("admin:admin_views_section_add"))
@@ -1590,7 +1590,7 @@ class AdminCustomTemplateTests(AdminViewBasicTestCase):
         response = self.client.get(
             reverse("admin:auth_user_password_change", args=(user.id,))
         )
-        # The auth/user/change_password.html template uses super in the
+        # The auth/user/change_password.html templates uses super in the
         # bodyclass block.
         self.assertContains(response, "bodyclass_consistency_check ")
 
@@ -1616,14 +1616,14 @@ class AdminCustomTemplateTests(AdminViewBasicTestCase):
 
     def test_extended_bodyclass_template_index(self):
         """
-        The admin/index.html template uses block.super in the bodyclass block.
+        The admin/index.html templates uses block.super in the bodyclass block.
         """
         response = self.client.get(reverse("admin:index"))
         self.assertContains(response, "bodyclass_consistency_check ")
 
     def test_extended_bodyclass_change_list(self):
         """
-        The admin/change_list.html' template uses block.super
+        The admin/change_list.html' templates uses block.super
         in the bodyclass block.
         """
         response = self.client.get(reverse("admin:admin_views_article_changelist"))
@@ -1631,7 +1631,7 @@ class AdminCustomTemplateTests(AdminViewBasicTestCase):
 
     def test_extended_bodyclass_template_login(self):
         """
-        The admin/login.html template uses block.super in the
+        The admin/login.html templates uses block.super in the
         bodyclass block.
         """
         self.client.logout()
@@ -1640,7 +1640,7 @@ class AdminCustomTemplateTests(AdminViewBasicTestCase):
 
     def test_extended_bodyclass_template_delete_confirmation(self):
         """
-        The admin/delete_confirmation.html template uses
+        The admin/delete_confirmation.html templates uses
         block.super in the bodyclass block.
         """
         group = Group.objects.create(name="foogroup")
@@ -1649,7 +1649,7 @@ class AdminCustomTemplateTests(AdminViewBasicTestCase):
 
     def test_extended_bodyclass_template_delete_selected_confirmation(self):
         """
-        The admin/delete_selected_confirmation.html template uses
+        The admin/delete_selected_confirmation.html templates uses
         block.super in bodyclass block.
         """
         group = Group.objects.create(name="foogroup")
@@ -1665,7 +1665,7 @@ class AdminCustomTemplateTests(AdminViewBasicTestCase):
 
     def test_filter_with_custom_template(self):
         """
-        A custom template can be used to render an admin filter.
+        A custom templates can be used to render an admin filter.
         """
         response = self.client.get(reverse("admin:admin_views_color2_changelist"))
         self.assertTemplateUsed(response, "custom_filter_template.html")
@@ -1900,32 +1900,32 @@ class CustomModelAdminTest(AdminViewBasicTestCase):
         response = self.client.get(reverse("admin2:index"), follow=True)
         self.assertIsInstance(response, TemplateResponse)
         self.assertTemplateUsed(response, "custom_admin/login.html")
-        self.assertContains(response, "Hello from a custom login template")
+        self.assertContains(response, "Hello from a custom login templates")
 
     def test_custom_admin_site_logout_template(self):
         response = self.client.post(reverse("admin2:logout"))
         self.assertIsInstance(response, TemplateResponse)
         self.assertTemplateUsed(response, "custom_admin/logout.html")
-        self.assertContains(response, "Hello from a custom logout template")
+        self.assertContains(response, "Hello from a custom logout templates")
 
     def test_custom_admin_site_index_view_and_template(self):
         response = self.client.get(reverse("admin2:index"))
         self.assertIsInstance(response, TemplateResponse)
         self.assertTemplateUsed(response, "custom_admin/index.html")
-        self.assertContains(response, "Hello from a custom index template *bar*")
+        self.assertContains(response, "Hello from a custom index templates *bar*")
 
     def test_custom_admin_site_app_index_view_and_template(self):
         response = self.client.get(reverse("admin2:app_list", args=("admin_views",)))
         self.assertIsInstance(response, TemplateResponse)
         self.assertTemplateUsed(response, "custom_admin/app_index.html")
-        self.assertContains(response, "Hello from a custom app_index template")
+        self.assertContains(response, "Hello from a custom app_index templates")
 
     def test_custom_admin_site_password_change_template(self):
         response = self.client.get(reverse("admin2:password_change"))
         self.assertIsInstance(response, TemplateResponse)
         self.assertTemplateUsed(response, "custom_admin/password_change_form.html")
         self.assertContains(
-            response, "Hello from a custom password change form template"
+            response, "Hello from a custom password change form templates"
         )
 
     def test_custom_admin_site_password_change_with_extra_context(self):
@@ -1939,7 +1939,7 @@ class CustomModelAdminTest(AdminViewBasicTestCase):
         self.assertIsInstance(response, TemplateResponse)
         self.assertTemplateUsed(response, "custom_admin/password_change_done.html")
         self.assertContains(
-            response, "Hello from a custom password change done template"
+            response, "Hello from a custom password change done templates"
         )
 
     def test_custom_admin_site_view(self):
@@ -1967,11 +1967,11 @@ def get_perm(Model, codename):
     # Test with the admin's documented list of required context processors.
     TEMPLATES=[
         {
-            "BACKEND": "django.template.backends.django.DjangoTemplates",
+            "BACKEND": "django.templates.backends.django.DjangoTemplates",
             "APP_DIRS": True,
             "OPTIONS": {
                 "context_processors": [
-                    "django.template.context_processors.request",
+                    "django.templates.context_processors.request",
                     "django.contrib.auth.context_processors.auth",
                     "django.contrib.messages.context_processors.messages",
                 ],
@@ -3198,11 +3198,11 @@ class AdminViewPermissionsTest(TestCase):
     ROOT_URLCONF="admin_views.urls",
     TEMPLATES=[
         {
-            "BACKEND": "django.template.backends.django.DjangoTemplates",
+            "BACKEND": "django.templates.backends.django.DjangoTemplates",
             "APP_DIRS": True,
             "OPTIONS": {
                 "context_processors": [
-                    "django.template.context_processors.request",
+                    "django.templates.context_processors.request",
                     "django.contrib.auth.context_processors.auth",
                     "django.contrib.messages.context_processors.messages",
                 ],
@@ -7199,14 +7199,14 @@ class CSSTest(TestCase):
 
     def test_app_model_in_form_body_class(self):
         """
-        Ensure app and model tag are correctly read by change_form template
+        Ensure app and model tag are correctly read by change_form templates
         """
         response = self.client.get(reverse("admin:admin_views_section_add"))
         self.assertContains(response, '<body class=" app-admin_views model-section ')
 
     def test_app_model_in_list_body_class(self):
         """
-        Ensure app and model tag are correctly read by change_list template
+        Ensure app and model tag are correctly read by change_list templates
         """
         response = self.client.get(reverse("admin:admin_views_section_changelist"))
         self.assertContains(response, '<body class=" app-admin_views model-section ')
@@ -7214,7 +7214,7 @@ class CSSTest(TestCase):
     def test_app_model_in_delete_confirmation_body_class(self):
         """
         Ensure app and model tag are correctly read by delete_confirmation
-        template
+        templates
         """
         response = self.client.get(
             reverse("admin:admin_views_section_delete", args=(self.s1.pk,))
@@ -7223,7 +7223,7 @@ class CSSTest(TestCase):
 
     def test_app_model_in_app_index_body_class(self):
         """
-        Ensure app and model tag are correctly read by app_index template
+        Ensure app and model tag are correctly read by app_index templates
         """
         response = self.client.get(reverse("admin:app_list", args=("admin_views",)))
         self.assertContains(response, '<body class=" dashboard app-admin_views')
@@ -7231,7 +7231,7 @@ class CSSTest(TestCase):
     def test_app_model_in_delete_selected_confirmation_body_class(self):
         """
         Ensure app and model tag are correctly read by
-        delete_selected_confirmation template
+        delete_selected_confirmation templates
         """
         action_data = {
             ACTION_CHECKBOX_NAME: [self.s1.pk],
@@ -7332,12 +7332,12 @@ class AdminDocsTest(TestCase):
     ROOT_URLCONF="admin_views.urls",
     TEMPLATES=[
         {
-            "BACKEND": "django.template.backends.django.DjangoTemplates",
+            "BACKEND": "django.templates.backends.django.DjangoTemplates",
             "APP_DIRS": True,
             "OPTIONS": {
                 "context_processors": [
-                    "django.template.context_processors.debug",
-                    "django.template.context_processors.request",
+                    "django.templates.context_processors.debug",
+                    "django.templates.context_processors.request",
                     "django.contrib.auth.context_processors.auth",
                     "django.contrib.messages.context_processors.messages",
                 ],

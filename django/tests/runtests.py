@@ -214,13 +214,13 @@ def setup_collect_tests(start_at, start_after, test_labels=None):
     settings.STATIC_ROOT = os.path.join(TMPDIR, "static")
     settings.TEMPLATES = [
         {
-            "BACKEND": "django.template.backends.django.DjangoTemplates",
+            "BACKEND": "django.templates.backends.django.DjangoTemplates",
             "DIRS": [TEMPLATE_DIR],
             "APP_DIRS": True,
             "OPTIONS": {
                 "context_processors": [
-                    "django.template.context_processors.debug",
-                    "django.template.context_processors.request",
+                    "django.templates.context_processors.debug",
+                    "django.templates.context_processors.request",
                     "django.contrib.auth.context_processors.auth",
                     "django.contrib.messages.context_processors.messages",
                 ],

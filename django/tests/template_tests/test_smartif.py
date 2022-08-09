@@ -8,7 +8,7 @@ class SmartIfTests(unittest.TestCase):
         self.assertEqual(expected, IfParser(tokens).parse().eval({}))
 
     # We only test things here that are difficult to test elsewhere
-    # Many other tests are found in the main tests for builtin template tags
+    # Many other tests are found in the main tests for builtin templates tags
     # Test parsing via the printed parse tree
     def test_not(self):
         var = IfParser(["not", False]).parse()

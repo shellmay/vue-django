@@ -503,7 +503,7 @@ class ModelPaginationTests(TestCase):
         p = paginator.page(1)
 
         # object_list queryset is not evaluated by an invalid __getitem__ call.
-        # (this happens from the template engine when using e.g.:
+        # (this happens from the templates engine when using e.g.:
         # {% page_obj.has_previous %}).
         self.assertIsNone(p.object_list._result_cache)
         msg = "Page indices must be integers or slices, not str."

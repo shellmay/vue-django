@@ -130,11 +130,11 @@ class StaticTests(SimpleTestCase):
     @override_settings(
         TEMPLATES=[
             {
-                "BACKEND": "django.template.backends.django.DjangoTemplates",
+                "BACKEND": "django.templates.backends.django.DjangoTemplates",
                 "OPTIONS": {
                     "loaders": [
                         (
-                            "django.template.loaders.locmem.Loader",
+                            "django.templates.loaders.locmem.Loader",
                             {
                                 "static/directory_index.html": "Test index",
                             },

@@ -285,7 +285,7 @@ class IfChangedTests(SimpleTestCase):
 
         # Using generator to mimic concurrency.
         # The generator is not passed to the 'for' loop, because it does a list(values)
-        # instead, call gen.next() in the template to control the generator.
+        # instead, call gen.next() in the templates to control the generator.
         def gen():
             yield 1
             yield 2
@@ -299,7 +299,7 @@ class IfChangedTests(SimpleTestCase):
             self.assertEqual(
                 output2,
                 "[0,1,2,3]",
-                "Expected [0,1,2,3] in second parallel template, got {}".format(
+                "Expected [0,1,2,3] in second parallel templates, got {}".format(
                     output2
                 ),
             )
@@ -312,12 +312,12 @@ class IfChangedTests(SimpleTestCase):
         self.assertEqual(
             output1,
             "[0,1,2,3]",
-            "Expected [0,1,2,3] in first template, got {}".format(output1),
+            "Expected [0,1,2,3] in first templates, got {}".format(output1),
         )
 
     def test_ifchanged_render_once(self):
         """
-        #19890. The content of ifchanged template tag was rendered twice.
+        #19890. The content of ifchanged templates tag was rendered twice.
         """
         template = self.engine.from_string(
             '{% ifchanged %}{% cycle "1st time" "2nd time" %}{% endifchanged %}'
@@ -333,9 +333,9 @@ class IfChangedTests(SimpleTestCase):
         engine = Engine(
             loaders=[
                 (
-                    "django.template.loaders.locmem.Loader",
+                    "django.templates.loaders.locmem.Loader",
                     {
-                        "template": (
+                        "templates": (
                             '{% for x in vars %}{% include "include" %}{% endfor %}'
                         ),
                         "include": "{% ifchanged %}{{ x }}{% endifchanged %}",
@@ -343,7 +343,7 @@ class IfChangedTests(SimpleTestCase):
                 ),
             ]
         )
-        output = engine.render_to_string("template", {"vars": [1, 1, 2, 2, 3, 3]})
+        output = engine.render_to_string("templates", {"vars": [1, 1, 2, 2, 3, 3]})
         self.assertEqual(output, "123")
 
     def test_include_state(self):
@@ -351,9 +351,9 @@ class IfChangedTests(SimpleTestCase):
         engine = Engine(
             loaders=[
                 (
-                    "django.template.loaders.locmem.Loader",
+                    "django.templates.loaders.locmem.Loader",
                     {
-                        "template": (
+                        "templates": (
                             '{% for x in vars %}{% include "include" %}'
                             '{% include "include" %}{% endfor %}'
                         ),
@@ -362,5 +362,5 @@ class IfChangedTests(SimpleTestCase):
                 ),
             ]
         )
-        output = engine.render_to_string("template", {"vars": [1, 1, 2, 2, 3, 3]})
+        output = engine.render_to_string("templates", {"vars": [1, 1, 2, 2, 3, 3]})
         self.assertEqual(output, "112233")

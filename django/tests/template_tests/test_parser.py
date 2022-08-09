@@ -1,5 +1,5 @@
 """
-Testing some internals of the template processing.
+Testing some internals of the templates processing.
 These are *not* examples to be copied in user code.
 """
 from django.template import Library, TemplateSyntaxError

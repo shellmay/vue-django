@@ -11,7 +11,7 @@ def get_person(request, pk):
 
 
 def no_template_used(request):
-    template = Template("This is a string-based template")
+    template = Template("This is a string-based templates")
     return HttpResponse(template.render(Context({})))
 
 

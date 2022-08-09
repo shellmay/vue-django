@@ -7,7 +7,7 @@ from ..utils import setup
 class ResetCycleTagTests(SimpleTestCase):
     @setup({"resetcycle01": "{% resetcycle %}"})
     def test_resetcycle01(self):
-        with self.assertRaisesMessage(TemplateSyntaxError, "No cycles in template."):
+        with self.assertRaisesMessage(TemplateSyntaxError, "No cycles in templates."):
             self.engine.get_template("resetcycle01")
 
     @setup({"resetcycle02": "{% resetcycle undefinedcycle %}"})

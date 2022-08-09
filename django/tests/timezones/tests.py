@@ -1010,7 +1010,7 @@ class TemplateTests(SimpleTestCase):
             ),
         }
 
-        # Transform a list of keys in 'datetimes' to the expected template
+        # Transform a list of keys in 'datetimes' to the expected templates
         # output. This makes the definition of 'results' more readable.
         def t(*result):
             return "|".join(datetimes[key].isoformat() for key in result)
@@ -1243,7 +1243,7 @@ class TemplateTests(SimpleTestCase):
     @skipIf(sys.platform == "win32", "Windows uses non-standard time zone names")
     def test_tz_template_context_processor(self):
         """
-        Test the django.template.context_processors.tz template context processor.
+        Test the django.templates.context_processors.tz templates context processor.
         """
         tpl = Template("{{ TIME_ZONE }}")
         context = Context()

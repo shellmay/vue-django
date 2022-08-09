@@ -55,7 +55,7 @@ class ExtendsRelativeBehaviorTests(SimpleTestCase):
         engine = Engine(dirs=[RELATIVE])
         msg = (
             "The relative path '\"./../two.html\"' points outside the file "
-            "hierarchy that template 'error_extends.html' is in."
+            "hierarchy that templates 'error_extends.html' is in."
         )
         with self.assertRaisesMessage(TemplateSyntaxError, msg):
             engine.render_to_string("error_extends.html")
@@ -84,7 +84,7 @@ class IncludeRelativeBehaviorTests(SimpleTestCase):
         engine = Engine(dirs=[RELATIVE])
         msg = (
             "The relative path '\"./../three.html\"' points outside the file "
-            "hierarchy that template 'error_include.html' is in."
+            "hierarchy that templates 'error_include.html' is in."
         )
         with self.assertRaisesMessage(TemplateSyntaxError, msg):
             engine.render_to_string("error_include.html")
@@ -107,7 +107,7 @@ class ExtendsMixedBehaviorTests(SimpleTestCase):
         engine = Engine(dirs=[RELATIVE])
         msg = (
             "The relative path '\"./dir2/../looped.html\"' was translated to "
-            "template name 'dir1/looped.html', the same template in which "
+            "templates name 'dir1/looped.html', the same templates in which "
             "the tag appears."
         )
         with self.assertRaisesMessage(TemplateSyntaxError, msg):

@@ -142,7 +142,7 @@ class AuthContextProcessorTests(TestCase):
         self.assertContains(response, "unicode: super")
         self.assertContains(response, "id: %d" % self.superuser.pk)
         self.assertContains(response, "username: super")
-        # bug #12037 is tested by the {% url %} in the template:
+        # bug #12037 is tested by the {% url %} in the templates:
         self.assertContains(response, "url: /userpage/super/")
 
         # A Q() comparing a user and with another Q() (in an AND or OR fashion).

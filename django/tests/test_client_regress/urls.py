@@ -12,7 +12,7 @@ urlpatterns = [
     path(
         "request_data_extended/",
         views.request_data,
-        {"template": "extended.html", "data": "bacon"},
+        {"templates": "extended.html", "data": "bacon"},
     ),
     path("arg_view/<name>/", views.view_with_argument, name="arg_view"),
     path("nested_view/", views.nested_view, name="nested_view"),

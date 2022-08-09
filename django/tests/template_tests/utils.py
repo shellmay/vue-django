@@ -35,9 +35,9 @@ def setup(templates, *args, test_once=False):
 
     loaders = [
         (
-            "django.template.loaders.cached.Loader",
+            "django.templates.loaders.cached.Loader",
             [
-                ("django.template.loaders.locmem.Loader", templates),
+                ("django.templates.loaders.locmem.Loader", templates),
             ],
         ),
     ]
@@ -48,7 +48,7 @@ def setup(templates, *args, test_once=False):
         @override_settings(TEMPLATES=None)
         @wraps(func)
         def inner(self):
-            # Set up custom template tag libraries if specified
+            # Set up custom templates tag libraries if specified
             libraries = getattr(self, "libraries", {})
 
             self.engine = Engine(

@@ -13,7 +13,7 @@ extended_locale_paths = settings.LOCALE_PATHS + [
 
 class MultipleLocaleActivationTestCase(SimpleTestCase):
     """
-    Tests for template rendering when multiple locales are activated during the
+    Tests for templates rendering when multiple locales are activated during the
     lifetime of the same process.
     """
 

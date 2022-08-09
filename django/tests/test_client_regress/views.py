@@ -14,9 +14,9 @@ class CustomTestException(Exception):
 
 
 def no_template_view(request):
-    "A simple view that expects a GET request, and returns a rendered template"
+    "A simple view that expects a GET request, and returns a rendered templates"
     return HttpResponse(
-        "No template used. Sample content: twice once twice. Content ends."
+        "No templates used. Sample content: twice once twice. Content ends."
     )
 
 
@@ -166,7 +166,7 @@ def request_context_view(request):
 
 
 def render_template_multiple_times(request):
-    """A view that renders a template multiple times."""
+    """A view that renders a templates multiple times."""
     return HttpResponse(render_to_string("base.html") + render_to_string("base.html"))
 
 

@@ -22,7 +22,7 @@ from django.views.generic import TemplateView
 
 
 def get_view(request):
-    "A simple view that expects a GET request, and returns a rendered template"
+    "A simple view that expects a GET request, and returns a rendered templates"
     t = Template("This is a test. {{ var }} is the value.", name="GET Template")
     c = Context({"var": request.GET.get("var", 42)})
 
@@ -76,7 +76,7 @@ def put_view(request):
 
 
 def post_view(request):
-    """A view that expects a POST, and returns a different template depending
+    """A view that expects a POST, and returns a different templates depending
     on whether any POST data is available
     """
     if request.method == "POST":
@@ -137,10 +137,10 @@ def raw_post_view(request):
         root = parseString(request.body)
         first_book = root.firstChild.firstChild
         title, author = [n.firstChild.nodeValue for n in first_book.childNodes]
-        t = Template("{{ title }} - {{ author }}", name="Book template")
+        t = Template("{{ title }} - {{ author }}", name="Book templates")
         c = Context({"title": title, "author": author})
     else:
-        t = Template("GET request.", name="Book GET template")
+        t = Template("GET request.", name="Book GET templates")
         c = Context()
 
     return HttpResponse(t.render(c))

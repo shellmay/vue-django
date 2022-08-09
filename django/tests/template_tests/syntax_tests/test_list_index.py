@@ -7,7 +7,7 @@ class ListIndexTests(SimpleTestCase):
     @setup({"list-index01": "{{ var.1 }}"})
     def test_list_index01(self):
         """
-        List-index syntax allows a template to access a certain item of a
+        List-index syntax allows a templates to access a certain item of a
         subscriptable object.
         """
         output = self.engine.render_to_string(

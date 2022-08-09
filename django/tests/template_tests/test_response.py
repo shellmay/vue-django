@@ -43,12 +43,12 @@ class SimpleTemplateResponseTest(SimpleTestCase):
     def test_template_resolving(self):
         response = SimpleTemplateResponse("first/test.html")
         response.render()
-        self.assertEqual(response.content, b"First template\n")
+        self.assertEqual(response.content, b"First templates\n")
 
         templates = ["foo.html", "second/test.html", "first/test.html"]
         response = SimpleTemplateResponse(templates)
         response.render()
-        self.assertEqual(response.content, b"Second template\n")
+        self.assertEqual(response.content, b"Second templates\n")
 
         response = self._response()
         response.render()
@@ -151,7 +151,7 @@ class SimpleTemplateResponseTest(SimpleTestCase):
         self.assertEqual(response.content, b"Jinja2\n")
 
     def test_post_callbacks(self):
-        "Rendering a template response triggers the post-render callbacks"
+        "Rendering a templates response triggers the post-render callbacks"
         post = []
 
         def post1(obj):
@@ -166,11 +166,11 @@ class SimpleTemplateResponseTest(SimpleTestCase):
 
         # When the content is rendered, all the callbacks are invoked, too.
         response.render()
-        self.assertEqual(response.content, b"First template\n")
+        self.assertEqual(response.content, b"First templates\n")
         self.assertEqual(post, ["post1", "post2"])
 
     def test_pickling(self):
-        # Create a template response. The context is
+        # Create a templates response. The context is
         # known to be unpicklable (e.g., a function).
         response = SimpleTemplateResponse(
             "first/test.html",
@@ -194,7 +194,7 @@ class SimpleTemplateResponseTest(SimpleTestCase):
         self.assertEqual(unpickled_response.status_code, response.status_code)
 
         # ...and the unpickled response doesn't have the
-        # template-related attributes, so it can't be re-rendered
+        # templates-related attributes, so it can't be re-rendered
         template_attrs = ("template_name", "context_data", "_post_render_callbacks")
         for attr in template_attrs:
             self.assertFalse(hasattr(unpickled_response, attr))
@@ -249,7 +249,7 @@ class SimpleTemplateResponseTest(SimpleTestCase):
 @override_settings(
     TEMPLATES=[
         {
-            "BACKEND": "django.template.backends.django.DjangoTemplates",
+            "BACKEND": "django.templates.backends.django.DjangoTemplates",
             "DIRS": [TEMPLATE_DIR],
             "OPTIONS": {
                 "context_processors": [test_processor_name],
@@ -307,7 +307,7 @@ class TemplateResponseTest(SimpleTestCase):
         self.assertEqual(response.content, b"Jinja2\n")
 
     def test_pickling(self):
-        # Create a template response. The context is
+        # Create a templates response. The context is
         # known to be unpicklable (e.g., a function).
         response = TemplateResponse(
             self.factory.get("/"),
@@ -332,7 +332,7 @@ class TemplateResponseTest(SimpleTestCase):
         self.assertEqual(unpickled_response.status_code, response.status_code)
 
         # ...and the unpickled response doesn't have the
-        # template-related attributes, so it can't be re-rendered
+        # templates-related attributes, so it can't be re-rendered
         template_attrs = (
             "template_name",
             "context_data",

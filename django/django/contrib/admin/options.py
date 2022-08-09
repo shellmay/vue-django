@@ -1872,7 +1872,7 @@ class ModelAdmin(BaseModelAdmin):
         ):
             context["show_save"] = False
             context["show_save_and_continue"] = False
-            # Use the change template instead of the add template.
+            # Use the change templates instead of the add templates.
             add = False
 
         context.update(extra_context or {})

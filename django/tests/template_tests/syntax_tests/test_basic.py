@@ -16,7 +16,7 @@ class BasicSyntaxTests(SimpleTestCase):
     @setup(basic_templates)
     def test_basic_syntax01(self):
         """
-        Plain text should go through the template parser untouched.
+        Plain text should go through the templates parser untouched.
         """
         output = self.engine.render_to_string("basic-syntax01")
         self.assertEqual(output, "something cool")
@@ -33,7 +33,7 @@ class BasicSyntaxTests(SimpleTestCase):
     @setup(basic_templates)
     def test_basic_syntax03(self):
         """
-        More than one replacement variable is allowed in a template
+        More than one replacement variable is allowed in a templates
         """
         output = self.engine.render_to_string(
             "basic-syntax03", {"first": 1, "second": 2}
@@ -82,7 +82,7 @@ class BasicSyntaxTests(SimpleTestCase):
     @setup({"basic-syntax09": "{{ var.method }}"})
     def test_basic_syntax09(self):
         """
-        Attribute syntax allows a template to call an object's attribute
+        Attribute syntax allows a templates to call an object's attribute
         """
         output = self.engine.render_to_string("basic-syntax09", {"var": SomeClass()})
         self.assertEqual(output, "SomeClass.method")
@@ -146,7 +146,7 @@ class BasicSyntaxTests(SimpleTestCase):
     @setup({"basic-syntax18": "{{ foo.bar }}"})
     def test_basic_syntax18(self):
         """
-        Attribute syntax allows a template to call a dictionary key's
+        Attribute syntax allows a templates to call a dictionary key's
         value.
         """
         output = self.engine.render_to_string("basic-syntax18", {"foo": {"bar": "baz"}})
@@ -187,7 +187,7 @@ class BasicSyntaxTests(SimpleTestCase):
             template.render(Context({"var": SomeClass()}))
 
     # Don't get confused when parsing something that is almost, but not
-    # quite, a template tag.
+    # quite, a templates tag.
     @setup({"basic-syntax21": "a {{ moo %} b"})
     def test_basic_syntax21(self):
         output = self.engine.render_to_string("basic-syntax21")
@@ -325,17 +325,17 @@ class BasicSyntaxTests(SimpleTestCase):
         )
         self.assertEqual(output, "foo bar")
 
-    @setup({"template": "{% block content %}"})
+    @setup({"templates": "{% block content %}"})
     def test_unclosed_block(self):
         msg = "Unclosed tag on line 1: 'block'. Looking for one of: endblock."
         with self.assertRaisesMessage(TemplateSyntaxError, msg):
-            self.engine.render_to_string("template")
+            self.engine.render_to_string("templates")
 
-    @setup({"template": "{% if a %}"})
+    @setup({"templates": "{% if a %}"})
     def test_unclosed_block2(self):
         msg = "Unclosed tag on line 1: 'if'. Looking for one of: elif, else, endif."
         with self.assertRaisesMessage(TemplateSyntaxError, msg):
-            self.engine.render_to_string("template")
+            self.engine.render_to_string("templates")
 
     @setup({"tpl-str": "%s", "tpl-percent": "%%", "tpl-weird-percent": "% %s"})
     def test_ignores_strings_that_look_like_format_interpolation(self):

@@ -4680,8 +4680,8 @@ class TemplateTests(SimpleTestCase):
                     raise ValidationError("Please make sure your passwords match.")
                 return self.cleaned_data
 
-        # There is full flexibility in displaying form fields in a template.
-        # Just pass a Form instance to the template, and use "dot" access to
+        # There is full flexibility in displaying form fields in a templates.
+        # Just pass a Form instance to the templates, and use "dot" access to
         # refer to individual fields. However, this flexibility comes with the
         # responsibility of displaying all the errors, including any that might
         # not be associated with a particular field.
@@ -4852,7 +4852,7 @@ class TemplateTests(SimpleTestCase):
         )
         # To display the errors that aren't associated with a particular field
         # e.g. the errors caused by Form.clean() -- use
-        # {{ form.non_field_errors }} in the template. If used on its own, it
+        # {{ form.non_field_errors }} in the templates. If used on its own, it
         # is displayed as a <ul> (or an empty string, if the list of errors is
         # empty).
         t = Template(

@@ -55,7 +55,7 @@ class MiddlewareTests(SimpleTestCase):
     ):
         """
         TemplateResponses returned from process_view() should be passed to any
-        template response middleware.
+        templates response middleware.
         """
         response = self.client.get("/middleware_exceptions/view/")
         expected_lines = [

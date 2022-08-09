@@ -90,7 +90,7 @@ def template_exception(request):
 
 def safestring_in_template_exception(request):
     """
-    Trigger an exception in the template machinery which causes a SafeString
+    Trigger an exception in the templates machinery which causes a SafeString
     to be inserted as args[0] of the Exception.
     """
     template = Template('{% extends "<script>alert(1);</script>" %}')
@@ -118,7 +118,7 @@ def raises_template_does_not_exist(request, path="i_dont_exist.html"):
 
 
 def render_no_template(request):
-    # If we do not specify a template, we need to make sure the debug
+    # If we do not specify a templates, we need to make sure the debug
     # view doesn't blow up.
     return render(request, [], {})
 

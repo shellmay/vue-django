@@ -105,11 +105,11 @@ class DebugViewTests(SimpleTestCase):
             "Malformed request syntax: /raises400_bad_request/",
         )
 
-    # Ensure no 403.html template exists to test the default case.
+    # Ensure no 403.html templates exists to test the default case.
     @override_settings(
         TEMPLATES=[
             {
-                "BACKEND": "django.template.backends.django.DjangoTemplates",
+                "BACKEND": "django.templates.backends.django.DjangoTemplates",
             }
         ]
     )
@@ -117,18 +117,18 @@ class DebugViewTests(SimpleTestCase):
         response = self.client.get("/raises403/")
         self.assertContains(response, "<h1>403 Forbidden</h1>", status_code=403)
 
-    # Set up a test 403.html template.
+    # Set up a test 403.html templates.
     @override_settings(
         TEMPLATES=[
             {
-                "BACKEND": "django.template.backends.django.DjangoTemplates",
+                "BACKEND": "django.templates.backends.django.DjangoTemplates",
                 "OPTIONS": {
                     "loaders": [
                         (
-                            "django.template.loaders.locmem.Loader",
+                            "django.templates.loaders.locmem.Loader",
                             {
                                 "403.html": (
-                                    "This is a test template for a 403 error "
+                                    "This is a test templates for a 403 error "
                                     "({{ exception }})."
                                 ),
                             },
@@ -140,7 +140,7 @@ class DebugViewTests(SimpleTestCase):
     )
     def test_403_template(self):
         response = self.client.get("/raises403/")
-        self.assertContains(response, "test template", status_code=403)
+        self.assertContains(response, "test templates", status_code=403)
         self.assertContains(response, "(Insufficient Permissions).", status_code=403)
 
     def test_404(self):
@@ -326,7 +326,7 @@ class DebugViewTests(SimpleTestCase):
             with override_settings(
                 TEMPLATES=[
                     {
-                        "BACKEND": "django.template.backends.django.DjangoTemplates",
+                        "BACKEND": "django.templates.backends.django.DjangoTemplates",
                         "DIRS": [tempdir],
                     }
                 ]
@@ -345,7 +345,7 @@ class DebugViewTests(SimpleTestCase):
             # Assert as HTML.
             self.assertContains(
                 response,
-                "<li><code>django.template.loaders.filesystem.Loader</code>: "
+                "<li><code>django.templates.loaders.filesystem.Loader</code>: "
                 "%s (Source does not exist)</li>"
                 % os.path.join(tempdir, "notfound.html"),
                 status_code=500,
@@ -354,7 +354,7 @@ class DebugViewTests(SimpleTestCase):
 
     def test_no_template_source_loaders(self):
         """
-        Make sure if you don't specify a template, the debug view doesn't blow up.
+        Make sure if you don't specify a templates, the debug view doesn't blow up.
         """
         with self.assertLogs("django.request", "ERROR"):
             with self.assertRaises(TemplateDoesNotExist):
@@ -363,7 +363,7 @@ class DebugViewTests(SimpleTestCase):
     @override_settings(ROOT_URLCONF="view_tests.default_urls")
     def test_default_urlconf_template(self):
         """
-        Make sure that the default URLconf template is shown instead of the
+        Make sure that the default URLconf templates is shown instead of the
         technical 404 page, if the user has not altered their URLconf yet.
         """
         response = self.client.get("/")
@@ -377,7 +377,7 @@ class DebugViewTests(SimpleTestCase):
         Regression test for bug #21530.
 
         If the admin app include is replaced with exactly one url
-        pattern, then the technical 404 template should be displayed.
+        pattern, then the technical 404 templates should be displayed.
 
         The bug here was that an AttributeError caused a 500 response.
         """
@@ -388,9 +388,9 @@ class DebugViewTests(SimpleTestCase):
 
     def test_template_encoding(self):
         """
-        The templates are loaded directly, not via a template loader, and
+        The templates are loaded directly, not via a templates loader, and
         should be opened as utf-8 charset as is the default specified on
-        template engines.
+        templates engines.
         """
         with mock.patch.object(DebugPath, "open") as m:
             default_urlconf(None)
@@ -458,10 +458,10 @@ class DebugViewQueriesAllowedTests(SimpleTestCase):
 @override_settings(
     DEBUG=True,
     ROOT_URLCONF="view_tests.urls",
-    # No template directories are configured, so no templates will be found.
+    # No templates directories are configured, so no templates will be found.
     TEMPLATES=[
         {
-            "BACKEND": "django.template.backends.dummy.TemplateStrings",
+            "BACKEND": "django.templates.backends.dummy.TemplateStrings",
         }
     ],
 )
@@ -1079,9 +1079,9 @@ class ExceptionReporterTests(SimpleTestCase):
 
     def test_template_encoding(self):
         """
-        The templates are loaded directly, not via a template loader, and
+        The templates are loaded directly, not via a templates loader, and
         should be opened as utf-8 charset as is the default specified on
-        template engines.
+        templates engines.
         """
         reporter = ExceptionReporter(None, None, None, None)
         with mock.patch.object(DebugPath, "open") as m:
@@ -1174,7 +1174,7 @@ class PlainTextReportTests(SimpleTestCase):
         )
         self.assertIn(
             "Template error:\n"
-            "In template %(path)s, error at line 2\n"
+            "In templates %(path)s, error at line 2\n"
             "   'cycle' tag requires at least two arguments\n"
             "   1 : Template with error:\n"
             "   2 :  {%% cycle %%} \n"

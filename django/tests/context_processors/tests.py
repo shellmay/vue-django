@@ -8,11 +8,11 @@ from django.test import SimpleTestCase, TestCase, override_settings
     ROOT_URLCONF="context_processors.urls",
     TEMPLATES=[
         {
-            "BACKEND": "django.template.backends.django.DjangoTemplates",
+            "BACKEND": "django.templates.backends.django.DjangoTemplates",
             "APP_DIRS": True,
             "OPTIONS": {
                 "context_processors": [
-                    "django.template.context_processors.request",
+                    "django.templates.context_processors.request",
                 ],
             },
         }
@@ -20,16 +20,16 @@ from django.test import SimpleTestCase, TestCase, override_settings
 )
 class RequestContextProcessorTests(SimpleTestCase):
     """
-    Tests for the ``django.template.context_processors.request`` processor.
+    Tests for the ``django.templates.context_processors.request`` processor.
     """
 
     def test_request_attributes(self):
         """
-        The request object is available in the template and that its
+        The request object is available in the templates and that its
         attributes can't be overridden by GET and POST parameters (#3828).
         """
         url = "/request_attrs/"
-        # We should have the request object in the template.
+        # We should have the request object in the templates.
         response = self.client.get(url)
         self.assertContains(response, "Have request")
         # Test is_secure.
@@ -54,11 +54,11 @@ class RequestContextProcessorTests(SimpleTestCase):
     ROOT_URLCONF="context_processors.urls",
     TEMPLATES=[
         {
-            "BACKEND": "django.template.backends.django.DjangoTemplates",
+            "BACKEND": "django.templates.backends.django.DjangoTemplates",
             "APP_DIRS": True,
             "OPTIONS": {
                 "context_processors": [
-                    "django.template.context_processors.debug",
+                    "django.templates.context_processors.debug",
                 ],
             },
         }
@@ -66,14 +66,14 @@ class RequestContextProcessorTests(SimpleTestCase):
 )
 class DebugContextProcessorTests(TestCase):
     """
-    Tests for the ``django.template.context_processors.debug`` processor.
+    Tests for the ``django.templates.context_processors.debug`` processor.
     """
 
     databases = {"default", "other"}
 
     def test_debug(self):
         url = "/debug/"
-        # We should have the debug flag in the template.
+        # We should have the debug flag in the templates.
         response = self.client.get(url)
         self.assertContains(response, "Have debug")
 

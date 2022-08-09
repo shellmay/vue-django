@@ -15,7 +15,7 @@ class NumpyTests(SimpleTestCase):
     @setup({"numpy-array-index01": "{{ var.1 }}"})
     def test_numpy_array_index01(self):
         """
-        Numpy's array-index syntax allows a template to access a certain
+        Numpy's array-index syntax allows a templates to access a certain
         item of a subscriptable object.
         """
         output = self.engine.render_to_string(

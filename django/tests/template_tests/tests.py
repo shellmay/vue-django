@@ -13,10 +13,10 @@ class TemplateTestMixin:
         return Engine(debug=self.debug_engine, **kwargs)
 
     def test_string_origin(self):
-        template = self._engine().from_string("string template")
+        template = self._engine().from_string("string templates")
         self.assertEqual(template.origin.name, UNKNOWN_SOURCE)
         self.assertIsNone(template.origin.loader_name)
-        self.assertEqual(template.source, "string template")
+        self.assertEqual(template.source, "string templates")
 
     @override_settings(SETTINGS_MODULE=None)
     def test_url_reverse_no_settings_module(self):
@@ -50,7 +50,7 @@ class TemplateTestMixin:
 
     def test_no_wrapped_exception(self):
         """
-        # 16770 -- The template system doesn't wrap exceptions, but annotates
+        # 16770 -- The templates system doesn't wrap exceptions, but annotates
         them.
         """
         engine = self._engine()
@@ -164,7 +164,7 @@ class TemplateTestMixin:
 
     def test_extends_generic_template(self):
         """
-        #24338 -- Allow extending django.template.backends.django.Template
+        #24338 -- Allow extending django.templates.backends.django.Template
         objects.
         """
         engine = self._engine()
@@ -177,7 +177,7 @@ class TemplateTestMixin:
     def test_node_origin(self):
         """
         #25848 -- Set origin on Node so debugging tools can determine which
-        template the node came from even if extending or including templates.
+        templates the node came from even if extending or including templates.
         """
         template = self._engine().from_string("content")
         for node in template.nodelist:

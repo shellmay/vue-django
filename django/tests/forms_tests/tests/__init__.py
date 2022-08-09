@@ -14,5 +14,5 @@ def jinja2_tests(test_func):
         # RemovedInDjango50Warning: When the deprecation ends, revert to
         # FORM_RENDERER="django.forms.renderers.Jinja2",
         FORM_RENDERER="django.forms.renderers.Jinja2DivFormRenderer",
-        TEMPLATES={"BACKEND": "django.template.backends.jinja2.Jinja2"},
+        TEMPLATES={"BACKEND": "django.templates.backends.jinja2.Jinja2"},
     )(test_func)

@@ -42,7 +42,7 @@ class ExtendsBehaviorTests(SimpleTestCase):
             dirs=[os.path.join(RECURSIVE, "fs")],
             loaders=[
                 (
-                    "django.template.loaders.locmem.Loader",
+                    "django.templates.loaders.locmem.Loader",
                     {
                         "one.html": (
                             '{% extends "one.html" %}{% block content %}'
@@ -58,7 +58,7 @@ class ExtendsBehaviorTests(SimpleTestCase):
                         ),
                     },
                 ),
-                "django.template.loaders.filesystem.Loader",
+                "django.templates.loaders.filesystem.Loader",
             ],
         )
         template = engine.get_template("one.html")
@@ -69,7 +69,7 @@ class ExtendsBehaviorTests(SimpleTestCase):
 
     def test_extend_self_error(self):
         """
-        Catch if a template extends itself and no other matching
+        Catch if a templates extends itself and no other matching
         templates are found.
         """
         engine = Engine(dirs=[os.path.join(RECURSIVE, "fs")])
@@ -91,9 +91,9 @@ class ExtendsBehaviorTests(SimpleTestCase):
             ],
             loaders=[
                 (
-                    "django.template.loaders.cached.Loader",
+                    "django.templates.loaders.cached.Loader",
                     [
-                        "django.template.loaders.filesystem.Loader",
+                        "django.templates.loaders.filesystem.Loader",
                     ],
                 ),
             ],
@@ -122,12 +122,12 @@ class ExtendsBehaviorTests(SimpleTestCase):
     def test_unique_history_per_loader(self):
         """
         Extending should continue even if two loaders return the same
-        name for a template.
+        name for a templates.
         """
         engine = Engine(
             loaders=[
                 [
-                    "django.template.loaders.locmem.Loader",
+                    "django.templates.loaders.locmem.Loader",
                     {
                         "base.html": (
                             '{% extends "base.html" %}{% block content %}'
@@ -136,7 +136,7 @@ class ExtendsBehaviorTests(SimpleTestCase):
                     },
                 ],
                 [
-                    "django.template.loaders.locmem.Loader",
+                    "django.templates.loaders.locmem.Loader",
                     {
                         "base.html": "{% block content %}loader2{% endblock %}",
                     },
@@ -155,7 +155,7 @@ class ExtendsBehaviorTests(SimpleTestCase):
         engine = Engine(
             loaders=[
                 [
-                    "django.template.loaders.locmem.Loader",
+                    "django.templates.loaders.locmem.Loader",
                     {
                         "base.html": (
                             "{% extends 'base.html' %}{% block base %}{{ block.super }}"
@@ -168,7 +168,7 @@ class ExtendsBehaviorTests(SimpleTestCase):
                     },
                 ],
                 [
-                    "django.template.loaders.locmem.Loader",
+                    "django.templates.loaders.locmem.Loader",
                     {
                         "base.html": (
                             "{% block base %}1{% endblock %}"

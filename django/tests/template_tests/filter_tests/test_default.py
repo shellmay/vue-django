@@ -10,7 +10,7 @@ class DefaultTests(SimpleTestCase):
     Literal string arguments to the default filter are always treated as
     safe strings, regardless of the auto-escaping state.
 
-    Note: we have to use {"a": ""} here, otherwise the invalid template
+    Note: we have to use {"a": ""} here, otherwise the invalid templates
     variable string interferes with the test result.
     """
 

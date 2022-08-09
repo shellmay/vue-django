@@ -740,9 +740,9 @@ class DjangoAdminSettingsDirectory(AdminScriptTestCase):
             )
 
     def test_setup_environ_custom_template(self):
-        "directory: startapp creates the correct directory with a custom template"
+        "directory: startapp creates the correct directory with a custom templates"
         template_path = os.path.join(custom_templates_dir, "app_template")
-        args = ["startapp", "--template", template_path, "custom_settings_test"]
+        args = ["startapp", "--templates", template_path, "custom_settings_test"]
         app_path = os.path.join(self.test_dir, "custom_settings_test")
         out, err = self.run_django_admin(args, "test_project.settings")
         self.assertNoOutput(err)
@@ -1461,12 +1461,12 @@ class ManageCheck(AdminScriptTestCase):
                 ],
                 "TEMPLATES": [
                     {
-                        "BACKEND": "django.template.backends.django.DjangoTemplates",
+                        "BACKEND": "django.templates.backends.django.DjangoTemplates",
                         "DIRS": [],
                         "APP_DIRS": True,
                         "OPTIONS": {
                             "context_processors": [
-                                "django.template.context_processors.request",
+                                "django.templates.context_processors.request",
                                 "django.contrib.auth.context_processors.auth",
                                 "django.contrib.messages.context_processors.messages",
                             ],
@@ -2457,10 +2457,10 @@ class StartProject(LiveServerTestCase, AdminScriptTestCase):
     def test_custom_project_template(self):
         """
         The startproject management command is able to use a different project
-        template.
+        templates.
         """
         template_path = os.path.join(custom_templates_dir, "project_template")
-        args = ["startproject", "--template", template_path, "customtestproject"]
+        args = ["startproject", "--templates", template_path, "customtestproject"]
         testproject_dir = os.path.join(self.test_dir, "customtestproject")
 
         out, err = self.run_django_admin(args)
@@ -2471,7 +2471,7 @@ class StartProject(LiveServerTestCase, AdminScriptTestCase):
     def test_template_dir_with_trailing_slash(self):
         "Ticket 17475: Template dir passed has a trailing path separator"
         template_path = os.path.join(custom_templates_dir, "project_template" + os.sep)
-        args = ["startproject", "--template", template_path, "customtestproject"]
+        args = ["startproject", "--templates", template_path, "customtestproject"]
         testproject_dir = os.path.join(self.test_dir, "customtestproject")
 
         out, err = self.run_django_admin(args)
@@ -2482,10 +2482,10 @@ class StartProject(LiveServerTestCase, AdminScriptTestCase):
     def test_custom_project_template_from_tarball_by_path(self):
         """
         The startproject management command is able to use a different project
-        template from a tarball.
+        templates from a tarball.
         """
         template_path = os.path.join(custom_templates_dir, "project_template.tgz")
-        args = ["startproject", "--template", template_path, "tarballtestproject"]
+        args = ["startproject", "--templates", template_path, "tarballtestproject"]
         testproject_dir = os.path.join(self.test_dir, "tarballtestproject")
 
         out, err = self.run_django_admin(args)
@@ -2495,13 +2495,13 @@ class StartProject(LiveServerTestCase, AdminScriptTestCase):
 
     def test_custom_project_template_from_tarball_to_alternative_location(self):
         """
-        Startproject can use a project template from a tarball and create it in
+        Startproject can use a project templates from a tarball and create it in
         a specified location.
         """
         template_path = os.path.join(custom_templates_dir, "project_template.tgz")
         args = [
             "startproject",
-            "--template",
+            "--templates",
             template_path,
             "tarballtestproject",
             "altlocation",
@@ -2517,11 +2517,11 @@ class StartProject(LiveServerTestCase, AdminScriptTestCase):
     def test_custom_project_template_from_tarball_by_url(self):
         """
         The startproject management command is able to use a different project
-        template from a tarball via a URL.
+        templates from a tarball via a URL.
         """
         template_url = "%s/custom_templates/project_template.tgz" % self.live_server_url
 
-        args = ["startproject", "--template", template_url, "urltestproject"]
+        args = ["startproject", "--templates", template_url, "urltestproject"]
         testproject_dir = os.path.join(self.test_dir, "urltestproject")
 
         out, err = self.run_django_admin(args)
@@ -2550,7 +2550,7 @@ class StartProject(LiveServerTestCase, AdminScriptTestCase):
             template_url = (
                 f"{self.live_server_url}/user_agent_check/project_template.tgz"
             )
-            args = ["startproject", "--template", template_url, "urltestproject"]
+            args = ["startproject", "--templates", template_url, "urltestproject"]
             _, err = self.run_django_admin(args)
 
             self.assertNoOutput(err)
@@ -2560,14 +2560,14 @@ class StartProject(LiveServerTestCase, AdminScriptTestCase):
 
     def test_project_template_tarball_url(self):
         """ "
-        Startproject management command handles project template tar/zip balls
+        Startproject management command handles project templates tar/zip balls
         from non-canonical urls.
         """
         template_url = (
             "%s/custom_templates/project_template.tgz/" % self.live_server_url
         )
 
-        args = ["startproject", "--template", template_url, "urltestproject"]
+        args = ["startproject", "--templates", template_url, "urltestproject"]
         testproject_dir = os.path.join(self.test_dir, "urltestproject")
 
         out, err = self.run_django_admin(args)
@@ -2580,7 +2580,7 @@ class StartProject(LiveServerTestCase, AdminScriptTestCase):
         template_path = os.path.join(custom_templates_dir, "project_template")
         args = [
             "startproject",
-            "--template",
+            "--templates",
             template_path,
             "customtestproject",
             "-e",
@@ -2603,11 +2603,11 @@ class StartProject(LiveServerTestCase, AdminScriptTestCase):
                 )
 
     def test_custom_project_template_context_variables(self):
-        "Make sure template context variables are rendered with proper values"
+        "Make sure templates context variables are rendered with proper values"
         template_path = os.path.join(custom_templates_dir, "project_template")
         args = [
             "startproject",
-            "--template",
+            "--templates",
             template_path,
             "another_project",
             "project_dir",
@@ -2623,13 +2623,13 @@ class StartProject(LiveServerTestCase, AdminScriptTestCase):
             self.assertIn('project_directory = "%s"' % testproject_dir, content)
 
     def test_no_escaping_of_project_variables(self):
-        "Make sure template context variables are not html escaped"
+        "Make sure templates context variables are not html escaped"
         # We're using a custom command so we need the alternate settings
         self.write_settings("alternate_settings.py")
         template_path = os.path.join(custom_templates_dir, "project_template")
         args = [
             "custom_startproject",
-            "--template",
+            "--templates",
             template_path,
             "another_project",
             "project_dir",
@@ -2654,7 +2654,7 @@ class StartProject(LiveServerTestCase, AdminScriptTestCase):
         template_path = os.path.join(custom_templates_dir, "project_template")
         args = [
             "startproject",
-            "--template",
+            "--templates",
             template_path,
             "yet_another_project",
             "project_dir2",
@@ -2677,7 +2677,7 @@ class StartProject(LiveServerTestCase, AdminScriptTestCase):
         template_path = os.path.join(custom_templates_dir, "project_template")
         args = [
             "startproject",
-            "--template",
+            "--templates",
             template_path,
             "--extension=txt",
             "customtestproject",
@@ -2687,7 +2687,7 @@ class StartProject(LiveServerTestCase, AdminScriptTestCase):
         out, err = self.run_django_admin(args)
         self.assertNoOutput(err)
         self.assertTrue(os.path.isdir(testproject_dir))
-        path = os.path.join(testproject_dir, "ticket-18091-non-ascii-template.txt")
+        path = os.path.join(testproject_dir, "ticket-18091-non-ascii-templates.txt")
         with open(path, encoding="utf-8") as f:
             self.assertEqual(
                 f.read().splitlines(False),
@@ -2699,7 +2699,7 @@ class StartProject(LiveServerTestCase, AdminScriptTestCase):
         template_path = os.path.join(custom_templates_dir, "project_template")
         args = [
             "startproject",
-            "--template",
+            "--templates",
             template_path,
             "custom_project_template_hidden_directories",
             "project_dir",
@@ -2721,7 +2721,7 @@ class StartProject(LiveServerTestCase, AdminScriptTestCase):
         project_name = "custom_project_template_hidden_directories_included"
         args = [
             "startproject",
-            "--template",
+            "--templates",
             template_path,
             project_name,
             "project_dir",
@@ -2748,7 +2748,7 @@ class StartProject(LiveServerTestCase, AdminScriptTestCase):
         project_name = "custom_project_with_excluded_directories"
         args = [
             "startproject",
-            "--template",
+            "--templates",
             template_path,
             project_name,
             "project_dir",

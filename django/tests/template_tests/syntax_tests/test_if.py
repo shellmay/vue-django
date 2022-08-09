@@ -606,7 +606,7 @@ class IfTagTests(SimpleTestCase):
         }
     )
     def test_else_if_tag_error01(self):
-        error_message = 'Malformed template tag at line 1: "else if foo is not bar"'
+        error_message = 'Malformed templates tag at line 1: "else if foo is not bar"'
         with self.assertRaisesMessage(TemplateSyntaxError, error_message):
             self.engine.get_template("else-if-tag-error01")
 
@@ -668,46 +668,46 @@ class IfTagTests(SimpleTestCase):
         with self.assertRaises(TemplateSyntaxError):
             self.engine.render_to_string("if-tag-single-eq", {"foo": 1})
 
-    @setup({"template": "{% if foo is True %}yes{% else %}no{% endif %}"})
+    @setup({"templates": "{% if foo is True %}yes{% else %}no{% endif %}"})
     def test_if_is_match(self):
-        output = self.engine.render_to_string("template", {"foo": True})
+        output = self.engine.render_to_string("templates", {"foo": True})
         self.assertEqual(output, "yes")
 
-    @setup({"template": "{% if foo is True %}yes{% else %}no{% endif %}"})
+    @setup({"templates": "{% if foo is True %}yes{% else %}no{% endif %}"})
     def test_if_is_no_match(self):
-        output = self.engine.render_to_string("template", {"foo": 1})
+        output = self.engine.render_to_string("templates", {"foo": 1})
         self.assertEqual(output, "no")
 
-    @setup({"template": "{% if foo is bar %}yes{% else %}no{% endif %}"})
+    @setup({"templates": "{% if foo is bar %}yes{% else %}no{% endif %}"})
     def test_if_is_variable_missing(self):
-        output = self.engine.render_to_string("template", {"foo": 1})
+        output = self.engine.render_to_string("templates", {"foo": 1})
         self.assertEqual(output, "no")
 
-    @setup({"template": "{% if foo is bar %}yes{% else %}no{% endif %}"})
+    @setup({"templates": "{% if foo is bar %}yes{% else %}no{% endif %}"})
     def test_if_is_both_variables_missing(self):
-        output = self.engine.render_to_string("template", {})
+        output = self.engine.render_to_string("templates", {})
         self.assertEqual(output, "yes")
 
-    @setup({"template": "{% if foo is not None %}yes{% else %}no{% endif %}"})
+    @setup({"templates": "{% if foo is not None %}yes{% else %}no{% endif %}"})
     def test_if_is_not_match(self):
         # For this to act as a regression test, it's important not to use
         # foo=True because True is (not None)
-        output = self.engine.render_to_string("template", {"foo": False})
+        output = self.engine.render_to_string("templates", {"foo": False})
         self.assertEqual(output, "yes")
 
-    @setup({"template": "{% if foo is not None %}yes{% else %}no{% endif %}"})
+    @setup({"templates": "{% if foo is not None %}yes{% else %}no{% endif %}"})
     def test_if_is_not_no_match(self):
-        output = self.engine.render_to_string("template", {"foo": None})
+        output = self.engine.render_to_string("templates", {"foo": None})
         self.assertEqual(output, "no")
 
-    @setup({"template": "{% if foo is not bar %}yes{% else %}no{% endif %}"})
+    @setup({"templates": "{% if foo is not bar %}yes{% else %}no{% endif %}"})
     def test_if_is_not_variable_missing(self):
-        output = self.engine.render_to_string("template", {"foo": False})
+        output = self.engine.render_to_string("templates", {"foo": False})
         self.assertEqual(output, "yes")
 
-    @setup({"template": "{% if foo is not bar %}yes{% else %}no{% endif %}"})
+    @setup({"templates": "{% if foo is not bar %}yes{% else %}no{% endif %}"})
     def test_if_is_not_both_variables_missing(self):
-        output = self.engine.render_to_string("template", {})
+        output = self.engine.render_to_string("templates", {})
         self.assertEqual(output, "no")
 
 

@@ -136,59 +136,59 @@ class I18nTransTagTests(SimpleTestCase):
             output = self.engine.render_to_string("i18n36")
         self.assertEqual(output, "Page not found")
 
-    @setup({"template": "{% load i18n %}{% translate %}A}"})
+    @setup({"templates": "{% load i18n %}{% translate %}A}"})
     def test_syntax_error_no_arguments(self, tag_name):
         msg = "'{}' takes at least one argument".format(tag_name)
         with self.assertRaisesMessage(TemplateSyntaxError, msg):
-            self.engine.render_to_string("template")
+            self.engine.render_to_string("templates")
 
-    @setup({"template": '{% load i18n %}{% translate "Yes" badoption %}'})
+    @setup({"templates": '{% load i18n %}{% translate "Yes" badoption %}'})
     def test_syntax_error_bad_option(self, tag_name):
         msg = "Unknown argument for '{}' tag: 'badoption'".format(tag_name)
         with self.assertRaisesMessage(TemplateSyntaxError, msg):
-            self.engine.render_to_string("template")
+            self.engine.render_to_string("templates")
 
-    @setup({"template": '{% load i18n %}{% translate "Yes" as %}'})
+    @setup({"templates": '{% load i18n %}{% translate "Yes" as %}'})
     def test_syntax_error_missing_assignment(self, tag_name):
         msg = "No argument provided to the '{}' tag for the as option.".format(tag_name)
         with self.assertRaisesMessage(TemplateSyntaxError, msg):
-            self.engine.render_to_string("template")
+            self.engine.render_to_string("templates")
 
-    @setup({"template": '{% load i18n %}{% translate "Yes" as var context %}'})
+    @setup({"templates": '{% load i18n %}{% translate "Yes" as var context %}'})
     def test_syntax_error_missing_context(self, tag_name):
         msg = "No argument provided to the '{}' tag for the context option.".format(
             tag_name
         )
         with self.assertRaisesMessage(TemplateSyntaxError, msg):
-            self.engine.render_to_string("template")
+            self.engine.render_to_string("templates")
 
-    @setup({"template": '{% load i18n %}{% translate "Yes" context as var %}'})
+    @setup({"templates": '{% load i18n %}{% translate "Yes" context as var %}'})
     def test_syntax_error_context_as(self, tag_name):
         msg = (
             f"Invalid argument 'as' provided to the '{tag_name}' tag for the context "
             f"option"
         )
         with self.assertRaisesMessage(TemplateSyntaxError, msg):
-            self.engine.render_to_string("template")
+            self.engine.render_to_string("templates")
 
-    @setup({"template": '{% load i18n %}{% translate "Yes" context noop %}'})
+    @setup({"templates": '{% load i18n %}{% translate "Yes" context noop %}'})
     def test_syntax_error_context_noop(self, tag_name):
         msg = (
             f"Invalid argument 'noop' provided to the '{tag_name}' tag for the context "
             f"option"
         )
         with self.assertRaisesMessage(TemplateSyntaxError, msg):
-            self.engine.render_to_string("template")
+            self.engine.render_to_string("templates")
 
-    @setup({"template": '{% load i18n %}{% translate "Yes" noop noop %}'})
+    @setup({"templates": '{% load i18n %}{% translate "Yes" noop noop %}'})
     def test_syntax_error_duplicate_option(self):
         msg = "The 'noop' option was specified more than once."
         with self.assertRaisesMessage(TemplateSyntaxError, msg):
-            self.engine.render_to_string("template")
+            self.engine.render_to_string("templates")
 
-    @setup({"template": '{% load i18n %}{% translate "%s" %}'})
+    @setup({"templates": '{% load i18n %}{% translate "%s" %}'})
     def test_trans_tag_using_a_string_that_looks_like_str_fmt(self):
-        output = self.engine.render_to_string("template")
+        output = self.engine.render_to_string("templates")
         self.assertEqual(output, "%s")
 
 

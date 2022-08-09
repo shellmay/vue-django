@@ -121,7 +121,7 @@ class RadioSelectTest(WidgetTest):
 
     def test_class_attrs(self):
         """
-        The <div> in the multiple_input.html widget template include the class
+        The <div> in the multiple_input.html widget templates include the class
         attribute.
         """
         html = """

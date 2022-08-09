@@ -23,7 +23,7 @@ class Jinja2Tests(TemplateStringsTests):
     options = {
         "keep_trailing_newline": True,
         "context_processors": [
-            "django.template.context_processors.static",
+            "django.templates.context_processors.static",
         ],
     }
 
@@ -34,7 +34,7 @@ class Jinja2Tests(TemplateStringsTests):
 
     def test_origin_from_string(self):
         template = self.engine.from_string("Hello!\n")
-        self.assertEqual(template.origin.name, "<template>")
+        self.assertEqual(template.origin.name, "<templates>")
         self.assertIsNone(template.origin.template_name)
 
     def test_self_context(self):

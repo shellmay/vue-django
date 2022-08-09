@@ -140,9 +140,9 @@ class DjangoTemplatesTests(TemplateStringsTests):
         self.assertEqual(
             engine.engine.builtins,
             [
-                "django.template.defaulttags",
-                "django.template.defaultfilters",
-                "django.template.loader_tags",
+                "django.templates.defaulttags",
+                "django.templates.defaultfilters",
+                "django.templates.loader_tags",
                 "template_backends.apps.good.templatetags.good_tags",
             ],
         )
@@ -150,7 +150,7 @@ class DjangoTemplatesTests(TemplateStringsTests):
     def test_autoescape_off(self):
         templates = [
             {
-                "BACKEND": "django.template.backends.django.DjangoTemplates",
+                "BACKEND": "django.templates.backends.django.DjangoTemplates",
                 "OPTIONS": {"autoescape": False},
             }
         ]
@@ -165,7 +165,7 @@ class DjangoTemplatesTests(TemplateStringsTests):
     def test_autoescape_default(self):
         templates = [
             {
-                "BACKEND": "django.template.backends.django.DjangoTemplates",
+                "BACKEND": "django.templates.backends.django.DjangoTemplates",
             }
         ]
         engines = EngineHandler(templates=templates)
@@ -177,7 +177,7 @@ class DjangoTemplatesTests(TemplateStringsTests):
         )
 
     def test_default_template_loaders(self):
-        """The cached template loader is always enabled by default."""
+        """The cached templates loader is always enabled by default."""
         for debug in (True, False):
             with self.subTest(DEBUG=debug), self.settings(DEBUG=debug):
                 engine = DjangoTemplates(
@@ -187,10 +187,10 @@ class DjangoTemplatesTests(TemplateStringsTests):
                     engine.engine.loaders,
                     [
                         (
-                            "django.template.loaders.cached.Loader",
+                            "django.templates.loaders.cached.Loader",
                             [
-                                "django.template.loaders.filesystem.Loader",
-                                "django.template.loaders.app_directories.Loader",
+                                "django.templates.loaders.filesystem.Loader",
+                                "django.templates.loaders.app_directories.Loader",
                             ],
                         )
                     ],

@@ -60,16 +60,16 @@ class HTTPSitemapTests(SitemapTestsBase):
     @override_settings(
         TEMPLATES=[
             {
-                "BACKEND": "django.template.backends.django.DjangoTemplates",
+                "BACKEND": "django.templates.backends.django.DjangoTemplates",
                 "DIRS": [os.path.join(os.path.dirname(__file__), "templates")],
             }
         ]
     )
     def test_simple_sitemap_custom_lastmod_index(self):
-        "A simple sitemap index can be rendered with a custom template"
+        "A simple sitemap index can be rendered with a custom templates"
         response = self.client.get("/simple/custom-lastmod-index.xml")
         expected_content = """<?xml version="1.0" encoding="UTF-8"?>
-<!-- This is a customised template -->
+<!-- This is a customised templates -->
 <sitemapindex xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 <sitemap><loc>%s/simple/sitemap-simple.xml</loc><lastmod>%s</lastmod></sitemap>
 </sitemapindex>
@@ -132,16 +132,16 @@ class HTTPSitemapTests(SitemapTestsBase):
     @override_settings(
         TEMPLATES=[
             {
-                "BACKEND": "django.template.backends.django.DjangoTemplates",
+                "BACKEND": "django.templates.backends.django.DjangoTemplates",
                 "DIRS": [os.path.join(os.path.dirname(__file__), "templates")],
             }
         ]
     )
     def test_simple_custom_sitemap(self):
-        "A simple sitemap can be rendered with a custom template"
+        "A simple sitemap can be rendered with a custom templates"
         response = self.client.get("/simple/custom-sitemap.xml")
         expected_content = """<?xml version="1.0" encoding="UTF-8"?>
-<!-- This is a customised template -->
+<!-- This is a customised templates -->
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 <url><loc>%s/location/</loc><lastmod>%s</lastmod><changefreq>never</changefreq><priority>0.5</priority></url>
 </urlset>
@@ -339,7 +339,7 @@ class HTTPSitemapTests(SitemapTestsBase):
         A simple i18n sitemap index can be rendered, without logging variable
         lookup errors.
         """
-        with self.assertNoLogs("django.template", "DEBUG"):
+        with self.assertNoLogs("django.templates", "DEBUG"):
             response = self.client.get("/simple/i18n.xml")
         expected_content = (
             '<?xml version="1.0" encoding="UTF-8"?>\n'
@@ -513,7 +513,7 @@ class DeprecatedTests(SitemapTestsBase):
     @override_settings(
         TEMPLATES=[
             {
-                "BACKEND": "django.template.backends.django.DjangoTemplates",
+                "BACKEND": "django.templates.backends.django.DjangoTemplates",
                 "DIRS": [os.path.join(os.path.dirname(__file__), "templates")],
             }
         ]
@@ -530,16 +530,16 @@ class DeprecatedTests(SitemapTestsBase):
     @override_settings(
         TEMPLATES=[
             {
-                "BACKEND": "django.template.backends.django.DjangoTemplates",
+                "BACKEND": "django.templates.backends.django.DjangoTemplates",
                 "DIRS": [os.path.join(os.path.dirname(__file__), "templates")],
             }
         ]
     )
     def test_simple_sitemap_custom_index(self):
-        "A simple sitemap index can be rendered with a custom template"
+        "A simple sitemap index can be rendered with a custom templates"
         response = self.client.get("/simple/custom-index.xml")
         expected_content = """<?xml version="1.0" encoding="UTF-8"?>
-    <!-- This is a customised template -->
+    <!-- This is a customised templates -->
     <sitemapindex xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
     <sitemap><loc>%s/simple/sitemap-simple.xml</loc></sitemap>
     </sitemapindex>

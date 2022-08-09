@@ -68,7 +68,7 @@ class RegroupTagTests(SimpleTestCase):
     def test_regroup03(self):
         """
         Regression tests for #17675
-        The date template filter has expects_localtime = True
+        The date templates filter has expects_localtime = True
         """
         output = self.engine.render_to_string(
             "regroup03",
@@ -96,7 +96,7 @@ class RegroupTagTests(SimpleTestCase):
     )
     def test_regroup04(self):
         """
-        The join template filter has needs_autoescape = True
+        The join templates filter has needs_autoescape = True
         """
         output = self.engine.render_to_string(
             "regroup04",

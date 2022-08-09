@@ -1187,7 +1187,7 @@ class TestSplitFormField(PostgreSQLSimpleTestCase):
         with self.assertRaisesMessage(exceptions.ValidationError, msg):
             SplitArrayField(forms.IntegerField(max_value=100), size=2).clean([0, 101])
 
-    # To locate the widget's template.
+    # To locate the widget's templates.
     @modify_settings(INSTALLED_APPS={"append": "django.contrib.postgres"})
     def test_rendering(self):
         class SplitForm(forms.Form):
